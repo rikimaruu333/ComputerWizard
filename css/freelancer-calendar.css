@@ -1,0 +1,398 @@
+body{
+    background-color: #F9F9F9;
+    overflow: hidden;
+}
+html{
+    scroll-behavior: smooth;
+}
+.freelancer-calendar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: calc(100% - 29%);
+    height: 87vh;
+    margin: 10px;
+    padding: 10px;
+    margin-left: 90px;
+    background-color: #F9F9F9;
+    border: 1px solid #DDDDDD;
+}
+.calendar {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    font-size: 14px;
+}
+
+.fc .fc-scrollgrid {
+    width: 100%; /* Ensure the calendar uses 100% of its container */
+    color: #202020;
+}
+
+.fc-daygrid-body table {
+    width: 100%; /* Ensure the table within the day grid stretches fully */
+}
+
+.fc-daygrid-day {
+    width: calc(100% / 7); /* Ensure each day occupies an equal width */
+}
+
+.fc-scroller::-webkit-scrollbar {
+    display: none; /* Hide scrollbar */
+}
+
+.fc-toolbar-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.fc-event {
+    background-color: #1f65fb;
+    border-color: #1f65fb;
+    color: #fff;
+    padding: 5px;
+}
+
+.fc-event:hover {
+    background-color: #0056b3;
+    cursor: pointer;
+}
+
+.event-detail-modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.event-detail-modal-content {
+    position: relative;
+    margin: 150px auto;
+    width: 350px;
+    max-height: 300px;
+    overflow: hidden;
+    background: #F9F9F9;
+    border-radius: 10px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .12);
+}
+
+.event-detail-modal-header {
+    padding: 10px 15px;
+    background-color: #F9F9F9;
+    color: #353535;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.event-detail-close-btn {
+    color: #202020;
+    font-size: 28px;
+    cursor: pointer;
+}
+.event-detail-close-btn:hover {
+    color: #1f65fb;
+}
+.event-details{
+    padding: 20px;
+}
+.event-detail-modal p {
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #353535;
+}
+.event-detail-modal p strong{
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #202020;
+    margin-right: 5px;
+}
+
+
+
+.add-calendar-modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.add-calendar-modal-content {
+    position: relative;
+    margin: 100px auto;
+    width: 500px;
+    height: 450px;
+    overflow: hidden;
+    background: #F9F9F9;
+    border-radius: 10px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .12);
+}
+
+.add-calendar-modal-header {
+    padding: 10px 15px;
+    background-color: #F9F9F9;
+    color: #353535;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.add-calendar-close-btn {
+    color: #202020;
+    font-size: 28px;
+    cursor: pointer;
+}
+.add-calendar-close-btn:hover {
+    color: #1f65fb;
+}
+.add-calendar-modal-form {
+    padding: 20px;
+}
+.add-calendar-modal-form-dates {
+    display: flex;
+    justify-content: space-between;
+}
+.add-calendar-modal label {
+    font-size: 14px;
+    font-weight: 500; /* Slightly bold labels */
+    margin-bottom: 5px; /* Spacing below labels */
+    display: block; /* Block display for labels */
+}
+
+.add-calendar-modal input[type="text"],
+.add-calendar-modal textarea,
+.add-calendar-modal input[type="time"],
+.add-calendar-modal input[type="date"] {
+    width: 100%; /* Full width for inputs */
+    padding: 10px; /* Spacing inside inputs */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 4px; /* Rounded corners */
+    margin-bottom: 10px; /* Spacing below inputs */
+    font-size: 12px;
+}
+.add-calendar-modal input[type="time"],
+.add-calendar-modal input[type="date"] {
+    width: 200px;
+}
+.add-calendar-modal input[type="date"] {
+    pointer-events: none;
+    background-color: #20202008;
+    color: #2020206a;
+}
+.add-calendar-modal textarea {
+    resize: none; /* Disable resizing for textarea */
+    height: 50px; /* Fixed height for textarea */
+}
+
+.add-calendar-modal button {
+    width: 100%;
+    height: 50px;
+    color: #F9F9F9;
+    background-color: #1f65fb;
+    border: 1px solid #555;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-calendar-modal button:hover {
+    color: #1f65fb;
+    background-color: #edf4ff;
+    border: 1px solid #1f65fb;
+}
+
+.event-detail-modal button {
+    width: 100%;
+    height: 50px;
+    color: #F9F9F9;
+    background-color: #fb1f1f;
+    border: 1px solid #555;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.event-detail-modal button:hover {
+    color: #fb1f1f;
+    background-color: #ffeded;
+    border: 1px solid #fb1f1f;
+}
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Start from transparent */
+    }
+    to {
+        opacity: 1; /* End with full opacity */
+    }
+}
+
+
+
+
+
+
+
+
+.freelancer-calendar-list{
+    position: absolute;
+    top: 64px;
+    right: 0;
+    padding-top: 40px;
+    width: calc(29% - 100px);
+    height: 90vh;
+    background-color: #F9F9F9;
+    border: 1px solid #DDDDDD;
+}
+
+.messaging-userinfo-container{
+    position: absolute;
+    top: 64px;
+    padding-top: 40px;
+    right: 0;
+    width: calc(30% - 100px);
+    height: 90vh;
+    background-color: #F9F9F9;
+    border: 1px solid #DDDDDD;
+  }
+
+  .messaging-default-userinfo
+  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .default-userinfo-details {
+    position: relative;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center align items */
+  }
+
+  .default-userinfo-details img
+   {
+    cursor: pointer;
+    min-width: 110px; 
+    min-height: 110px; 
+    max-width: 110px; 
+    max-height: 110px; 
+    object-fit: cover;
+  }
+
+  .default-userinfo-details h4
+  {
+    font-size: 26px; 
+    font-weight: 900;
+    color: #5b5b5b;
+  }
+  
+
+  .default-userinfo-data p
+  {
+    margin: 100px auto;
+    font-size: 12px;
+    color: #353535;
+    width: 80%;
+    text-align: center;
+    line-height: 20px;
+  }
+  .default-userinfo-data p span,
+  .default-userinfo-data p u
+  {
+    color: #1f65fb;
+    line-height: 20px;  
+  }
+
+
+
+
+
+  .calendar-tour-button{
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 2px;
+    font-size: 20px;
+    color: #1f65fb;
+    transition: all 0.2s ease;
+  }
+  .calendar-tour-button:hover{
+    scale: 1.1;
+  }
+
+
+/* Style for the step content */
+.custom-class-name .shepherd-content {
+    padding: 2px; /* Padding inside the modal */
+    outline: 1px solid #1f65fb;
+}
+
+
+/* Custom Shepherd Header Styles */ 
+.custom-class-name .shepherd-header {
+    font-size: 12px;
+    background-color: #edf4ff !important;
+}
+
+
+.custom-class-name .shepherd-title {
+    color: #202020; /* Title color */
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.custom-class-name .shepherd-text {
+    color: #353535; /* Text color */
+    font-size: 13px;
+}
+
+.custom-class-name .shepherd-button {
+    background-color: #1f65fb; /* Button background color */
+    color: #FFFFFF; /* Button text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.custom-class-name .shepherd-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+
+.custom-class-name .shepherd-arrow {
+    width: 0; /* Width of the arrow */
+    height: 0; /* Height of the arrow */
+    border-left: 8px solid transparent; /* Left side transparent */
+    border-right: 8px solid transparent; /* Right side transparent */
+    border-bottom: 8px solid #202020; /* Bottom color matching the modal header */
+    position: absolute; /* Positioning */
+}
+.highlight {
+    background-color: yellow; /* Example highlight color */
+    border: 2px solid red; /* Example border */
+}

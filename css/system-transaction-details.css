@@ -1,0 +1,335 @@
+
+
+.transaction-details-modal{
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.transaction-details-container-info,
+.transaction-info-container {
+    position: absolute;
+    top: 12%;
+    left: 33%;
+    width: 500px;
+    height: auto; 
+    overflow: hidden;
+    background: #F9F9F9;
+    border-radius: 10px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .12);
+}
+.transaction-details-container-info.info {
+    left: 29%;
+    width: 600px;
+}
+
+.transaction-details-container-header,
+.transaction-info-container-header {
+    padding: 10px 15px;
+    background-color: #F9F9F9;
+    color: #353535;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.transaction-details-close-btn,
+.transaction-info-close-btn {
+    color: #202020;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.transaction-details-close-btn:hover,
+.transaction-info-close-btn:hover {
+    color: #1f65fb;
+}
+.transaction-details-details-container,
+.transaction-info-details-container {
+    padding: 15px 20px 30px;
+}
+.transaction-details-details-container.info{
+    padding: 0px 20px 30px;/*  */
+}
+.transaction-details-details,
+.transaction-info-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+    outline: 1px solid #DDDDDD;
+    min-height: 300px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+.transaction-info-details{
+    min-height: 100px;
+    max-height: 400px;
+    padding-bottom: 1px;
+}
+.transaction-details-details.info{
+    min-height: 260px;
+}
+.transaction-details-details::-webkit-scrollbar,
+.transaction-info-details::-webkit-scrollbar {
+    width: 5px;
+}
+.transaction-details-details::-webkit-scrollbar-track,
+.transaction-info-details::-webkit-scrollbar-track {
+    background-color: #edf4ff;
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;
+}
+.transaction-details-details::-webkit-scrollbar-thumb,
+.transaction-info-details::-webkit-scrollbar-thumb {
+    background-color: #1f65fb;
+    border-radius: 10px;
+}
+.transaction-details-transaction-details,
+.transaction-info-transaction-details {
+    margin: 20px;
+}
+.transaction-info-transaction-details {
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.transaction-details-transaction-details p,
+.transaction-info-transaction-details p {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    line-height: 25px;
+    color: #202020;
+}
+.transaction-details-transaction-details p i.bxs-check-circle{
+    font-size: 15px;
+    color: #21e24e;
+    margin-right: 10px;
+}
+.transaction-details-transaction-details p i.bxs-x-circle{
+    font-size: 15px;
+    color: #fb1f1f;
+    margin-right: 10px;
+}
+.transaction-details-transaction-details-note,
+.transaction-info-transaction-details-note {
+    padding: 20px;
+    font-size: 12px;
+    font-style: italic;
+    color: #1f65fb;
+    border-top: 1px solid #1f65fb;
+    border-bottom: 1px solid #1f65fb;
+    background-color: #edf4ff;
+}
+.transaction-details-transaction-details-note p{
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    line-height: 25px;
+}
+.transaction-details-transaction-details-note p i{
+    font-size: 15px;
+    color: #1f65fb;
+    margin-right: 10px;
+}
+
+.transaction-details-details-info,
+.transaction-details-details-info-container,
+.transaction-info-details-info,
+.transaction-info-details-info-container {
+    width: 100%;
+}
+.transaction-details-user-info,
+.transaction-details-details-user-info,
+.transaction-info-details-user-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 1px solid #DDDDDD;
+}
+.transaction-details-line-img-container,
+.transaction-info-line-img-container {
+    
+    position: relative;
+}
+.transaction-details-user-info .line-img,
+.transaction-details-details-user-info .line-img,
+.transaction-info-details-user-info .line-img {
+    width: 100px;
+    height: 65px;
+
+    /* --bluepulse
+    width: 130px;
+    height: 72px; */
+}
+.transaction-details-details-user-info.info{
+    border: none;
+    padding: 10px 20px;
+}
+.transaction-details-profile,
+.transaction-info-profile {
+    display: flex;
+    align-items: center;
+    padding: 0px 15px;
+    cursor: pointer;
+}
+.transaction-details-profile.info{
+    min-width: 30%;
+}
+.transaction-details-profile:hover .details h3,
+.transaction-info-profile:hover .details h3 {
+    text-decoration: underline;
+}
+.transaction-details-profile img,
+.transaction-info-profile img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.transaction-details-profile .details,
+.transaction-info-profile .details {
+    margin-left: 15px;
+}
+
+.transaction-details-profile .details h3,
+.transaction-info-profile .details h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #202020;
+    word-wrap: break-word; 
+    word-break: break-word; 
+}
+
+.transaction-details-profile .details p,
+.transaction-info-profile .details p {
+    font-size: 12px;
+    font-weight: 400;
+    color: #65676b;
+    font-style: italic;
+}
+.transaction-details-buttons,
+.transaction-info-buttons {
+    display: flex;
+    align-items: center;
+}
+.transaction-details-buttons .accept-request-button-container,
+.transaction-details-buttons .reject-request-button-container,
+.transaction-details-buttons .cancel-request-button-container,
+.transaction-details-buttons .info-request-button-container {
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid #DDDDDD;
+    height: 60px;
+    width: 65px;
+}
+.transaction-details-buttons .accept-request-button-container:hover,
+.transaction-details-buttons .reject-request-button-container:hover,
+.transaction-details-buttons .cancel-request-button-container:hover,
+.transaction-details-buttons .info-request-button-container:hover{
+    background-color: #edf4ff;
+}
+.transaction-details-buttons .accept-request-button-container i,
+.transaction-details-buttons .reject-request-button-container i,
+.transaction-details-buttons .cancel-request-button-container i,
+.transaction-details-buttons .info-request-button-container i{
+    font-size: 18px;
+    transition: all 0.2s ease;
+}
+.transaction-details-buttons .accept-request-button-container i{
+    color: #1ffb61;
+}
+.transaction-details-buttons .reject-request-button-container i,
+.transaction-details-buttons .cancel-request-button-container i{
+    color: #fb1f1f;
+}
+.transaction-details-buttons .info-request-button-container i{
+    color: #1f65fb;
+}
+.transaction-details-buttons .accept-request-button-container i:hover,
+.transaction-details-buttons .reject-request-button-container i:hover,
+.transaction-details-buttons .cancel-request-button-container i:hover,
+.transaction-details-buttons .info-request-button-container i:hover{
+    scale: 1.1;
+}
+.no-transaction-details{
+    margin-top: 50px;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+}
+
+
+
+
+
+
+
+
+
+
+.ended-transaction-buttons{
+    display: flex;
+    align-items: center;
+}
+.ended-transaction-buttons .info-ended-transaction-button-container {
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid #DDDDDD;
+    height: 85px;
+    width: 90px;
+}
+.ended-transaction-buttons .info-ended-transaction-button-container:hover{
+    background-color: #edf4ff;
+}
+.ended-transaction-buttons .info-ended-transaction-button-container i{
+    font-size: 18px;
+    transition: all 0.2s ease;
+}
+.ended-transaction-buttons .info-ended-transaction-button-container i{
+    color: #1f65fb;
+}
+.ended-transaction-buttons .info-ended-transaction-button-container i:hover{
+    scale: 1.1;
+}
+.no-transaction{
+    margin-top: 50px;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

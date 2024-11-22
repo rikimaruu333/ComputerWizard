@@ -1,0 +1,184 @@
+
+.report-profile-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.report-profile-container {
+    position: absolute;
+    top: 10%;
+    left: 33%;
+    width: 500px;
+    height: auto; /* Allows dynamic height depending on the content */
+    overflow: hidden;
+    background: #F9F9F9;
+    border-radius: 10px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .12);
+}
+
+.report-profile-container-header {
+    padding: 10px 15px;
+    background-color: #F9F9F9;
+    color: #353535;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.report-profile-close-btn {
+    color: #202020;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.report-profile-close-btn:hover {
+    color: #1f65fb;
+}
+
+.report-profile-content {
+    display: flex;
+    align-items: center;
+}
+
+.report-profile-content img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.report-profile-content .details {
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.report-profile-content .details h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #202020;
+}
+
+.report-profile-content .details p {
+    font-size: 12px;
+    font-weight: 400;
+    color: #65676b;
+    font-style: italic;
+}
+
+.report-profile-form {
+    margin: 20px 25px;
+}
+
+.report-profile-form .report-text-header {
+    color: #202020;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 20px;
+}
+.report-options{
+    margin-top: 15px;
+    position: relative;
+    max-height: 200px;
+    overflow-y: auto;
+}
+.report-options::-webkit-scrollbar{
+    width: 5px;
+}
+.report-options::-webkit-scrollbar-track{
+    background-color: #edf4ff;
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;
+}
+.report-options::-webkit-scrollbar-thumb{
+    background-color: #1f65fb;
+    border-radius: 10px;
+}
+.report-options label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    color: #202020;
+    font-size: 12px;
+    cursor: pointer;
+}
+.report-options label:nth-last-child(2) {
+    margin-bottom: 0;
+}
+.report-options label:hover{
+    color: #1f65fb;
+}
+
+.report-options textarea {
+    width: 90%;
+    resize: none;
+    font-size: 12px;
+    margin-top: 10px;
+    min-height: 80px;
+    background-color: #F9F9F9;
+    border: 1px solid #acacacc1;
+    padding: 8px;
+    border-radius: 5px;
+    outline: none;
+}
+
+.report-options textarea::placeholder {
+    color: #858585;
+    font-style: italic;
+}
+
+.report-profile-form input[type="radio"] {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.submit-report-button {
+    height: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #bcc0C4;
+    cursor: no-drop;
+    border-radius: 7px;
+    background: #e2e5e9;
+    transition: all 0.3s ease;
+    width: 100%;
+    outline: none;
+    border: none;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+.submit-report-button.active {
+    color: #F9F9F9;
+    cursor: pointer;
+    background-color: #1f65fb;
+    border: 1px solid #555;
+}
+.submit-report-button:hover {
+    background-color: #edf4ff;
+    border: 1px solid #1f65fb;
+    color: #1f65fb;
+}
+.submit-report-button:active {
+    background: #0b69d9;
+    color: #bcc0C4;
+}
+.submit-report-button:disabled {
+    cursor: no-drop !important;
+    background: #e2e5e9;    
+}
+.submit-report-button:disabled:hover {
+    background: #e2e5e9;
+    color: #bcc0C4;
+    outline: none;
+}

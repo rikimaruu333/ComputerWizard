@@ -1,0 +1,279 @@
+
+
+.restrict-modal,
+.unrestrict-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.restrict-modal.list,
+.unrestrict-modal.list {
+    background-color: transparent;
+}
+
+.restrict-container,
+.unrestrict-container {
+    position: absolute;
+    top: 12%;
+    left: 33%;
+    width: 500px;
+    height: auto; /* Allows dynamic height depending on the content */
+    overflow: hidden;
+    background: #F9F9F9;
+    border-radius: 10px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .12);
+}
+
+.restrict-container-header,
+.unrestrict-container-header {
+    padding: 10px 15px;
+    background-color: #F9F9F9;
+    color: #353535;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.restrict-close-btn,
+.unrestrict-close-btn {
+    color: #202020;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.restrict-close-btn:hover,  
+.unrestrict-close-btn:hover {
+    color: #1f65fb;
+}
+
+.restrict-view-reports{
+    position: relative;
+}
+.restrict-view-reports u{
+    cursor: pointer;
+    position: absolute;
+    top: 7px;
+    left: 35px;
+    color: #1f65fb;
+    font-style: italic;
+    font-size: 11px;
+    transition: all 0.2s ease;
+}
+.restrict-view-reports u:hover{
+    color: #202020;
+}
+.restrict-details,
+.unrestrict-details{
+    position: relative;
+    margin: 35px;
+    padding: 10px 20px;
+    outline: 1px solid #DDDDDD;
+    min-height: 245px;
+    max-height: 245px;
+    overflow-y: auto;
+}
+.unrestrict-details{
+    min-height: 150px;
+}
+.unrestrict-details p{
+    font-size: 14px;
+    color: #353535;
+    width: 100%;
+}
+.unrestrict-details span{
+    font-size: 14px;
+    margin-top: 30px;
+    font-weight: 500;
+    font-style: italic;
+}
+.restrict-details.list{
+    padding: 0;
+}
+.restrict-details::-webkit-scrollbar,
+.unrestrict-details::-webkit-scrollbar{
+    width: 5px;
+}
+.restrict-details::-webkit-scrollbar-track,
+.unrestrict-details::-webkit-scrollbar-track{
+    background-color: #edf4ff;
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;
+}
+.restrict-details::-webkit-scrollbar-thumb,
+.unrestrict-details::-webkit-scrollbar-thumb{
+    background-color: #1f65fb;
+    border-radius: 10px;
+}
+
+/* Style the form elements inside the modal */
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group.unrestrict{
+    margin-top: 35px;
+}
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #353535;
+    margin-bottom: 8px;
+}
+
+.form-group textarea,
+.form-group input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 13px;
+    color: #202020;
+    border: 1px solid #DDDDDD;
+    border-radius: 5px;
+    background-color: #F9F9F9;
+    outline: none;
+    box-shadow: none;
+    transition: border-color 0.3s ease-in-out;
+    resize: none;
+}
+
+.form-group textarea:focus,
+.form-group input[type="date"]:focus {
+    border-color: #1f65fb;
+}
+
+textarea::placeholder {
+    color: #A0A0A0;
+}
+
+
+/* Style the submit button */
+.btn-restrict,
+.btn-unrestrict {
+    width: 100%;
+    background-color: #1f65fb;
+    color: white;
+    font-size: 14px;
+    padding: 10px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-restrict:hover,
+.btn-unrestrict:hover {
+    background-color: #edf4ff;
+    outline: 1px solid #DDDDDD;
+    color: #1f65fb;
+}
+
+/* Style for optional admin notes */
+#adminNotes {
+    font-size: 13px;
+    color: #202020;
+    height: 80px;
+    resize: none;
+}
+
+
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.report-table th, 
+.report-table td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.report-table th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #f5f5f5;
+    font-size: 14px;
+    color: #353535;
+    font-weight: bold;
+}
+.report-table th:first-of-type {
+    width: 70%;
+}
+.report-table td {
+    font-size: 13px;
+    color: #202020;
+}
+
+.report-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.report-table tbody td[colspan="2"] {
+    padding: 15px;
+    font-size: 12px;
+    color: #1f65fb;
+    text-align: center;
+}
+
+/* Form responsiveness */
+@media (max-width: 600px) {
+    .restrict-container {
+        left: 10%;
+        width: 80%;
+    }
+
+    .form-group textarea,
+    .form-group select {
+        font-size: 13px;
+    }
+
+    .btn-restrict {
+        font-size: 14px;
+    }
+}
+
+/* Responsive Css  */
+
+@media (max-width: 980px) {
+    ul{
+        flex-direction: column;
+    }
+    ul li{
+        flex-direction: row;
+    }
+    ul li .progress{
+        margin: 0 30px;
+    }
+    .progress::after{
+        width: 5px;
+        height: 55px;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: -1;
+    }
+    .one::after{
+        height: 0;
+    }
+    ul li .icon{
+        margin: 15px 0;
+    }
+}
+
+@media (max-width:600px) {
+    .head .head_1{
+        font-size: 24px;
+    }
+    .head .head_2{
+        font-size: 16px;
+    }
+}

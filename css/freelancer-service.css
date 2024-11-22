@@ -1,0 +1,405 @@
+.service-modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.service-modal-content {
+    margin: 2% auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 60%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fefefe;
+}
+
+.service-modal-header {
+    padding: 10px 15px;
+    background-color: #f9f9f9;
+    color: #353535;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.service-modal-header h2 {
+    margin: 0;
+}
+
+.close-service-modal {
+    color: #202020;
+    font-size: 28px;
+    cursor: pointer;
+    color: #202020;
+    font-size: 28px;
+    cursor: pointer;
+}
+.close-service-modal:hover {
+    color: #1f65fb;
+}
+
+.service-table-container,
+.service-form-container {
+    margin: 10px 0;
+    background-color: #fefefe;
+    min-height: 350px;
+    max-height: 350px;
+    overflow-y: auto;
+}
+.service-table-container::-webkit-scrollbar{
+    width: 0;
+}
+.service-table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.service-table-container table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    font-size: 13px;
+} 
+.service-table-container table .service-config {
+    display: flex;
+    justify-content: space-evenly; 
+    align-items: center; 
+}   
+
+.service-table-container table .service-edit-config{
+    cursor: pointer;
+    padding: 5px;
+    margin: 0 10px;
+    color: #1f65fb;
+}
+
+.service-table-container table .service-delete-config{
+    cursor: pointer;
+    padding: 5px;
+    margin: 0 10px;
+    color: #fb1f1f;
+}
+.service-table-container table .service-edit-config:hover,
+.service-table-container table .service-delete-config:hover{
+    opacity: 0.7;
+}
+
+.service-table-container table .service-th {
+    width: 65%;
+}
+
+.service-table-container table .rate-th {
+    width: 15%;
+}
+
+.service-table-container table .config-th {
+    width: 20%;
+}
+
+
+.service-table-container table th {
+    position: sticky;
+    top: -3px;
+    z-index: 1;
+    background-color: #f2f2f2;
+    color: #1f65fb;
+    font-size: 14px;
+}
+
+.service-modal-footer {
+    padding: 10px;
+    background-color: #f9f9f9;
+    text-align: right;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top: 1px solid #DDDDDD;
+}
+
+
+.add-service-btn {
+    padding: 10px 20px;
+    background-color: #1f65fb;
+    border: 1px solid #555;
+    transition: background-color 0.3s ease;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.add-service-btn:hover {
+    background-color: #edf4ff;
+    border: 1px solid #1f65fb;
+    color: #1f65fb;
+}
+
+
+
+
+
+.add-service-modal-content {
+    margin: auto;
+    margin-top: 50px;
+    padding: 0;
+    border: 1px solid #888;
+    width: 30%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fefefe;
+}
+
+.add-service-modal-header {
+    padding: 10px 15px;
+    background-color: #f9f9f9;
+    color: #353535;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.add-service-modal-header h2 {
+    margin: 0;
+}
+
+.close-add-service-modal {
+    color: #202020;
+    font-size: 28px;
+    cursor: pointer;
+}
+.close-add-service-modal:hover {
+    color: #1f65fb;
+}
+
+.add-service-form-container {
+    padding: 10px 30px;
+    margin: 10px 0;
+    background-color: #fefefe;
+    min-height: 250px;
+    max-height: 250px;
+}
+.add-service-form-container label{
+    font-size: 13px;
+    font-weight: 500;
+    color: #202020;
+}
+.add-service-form-container input{
+    background-color: #f9f9f9;
+    border: 1px solid #DDDDDD;
+    margin: 8px 0;
+    padding: 10px 15px;
+    font-size: 13px;
+    border-radius: 8px;
+    width: 100%;
+    outline: none;
+}
+
+
+.add-service-modal-footer {
+    padding: 10px;
+    background-color: #f9f9f9;
+    text-align: right;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top: 1px solid #DDDDDD;
+}
+
+
+.add-service-btn {
+    padding: 10px 20px;
+    background-color: #1f65fb;
+    border: 1px solid #555;
+    transition: background-color 0.3s ease;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.add-service-btn:hover {
+    background-color: #edf4ff;
+    border: 1px solid #1f65fb;
+    color: #1f65fb;
+}
+
+.update-service-modal-content {
+    margin: auto;
+    margin-top: 50px;
+    padding: 0;
+    border: 1px solid #888;
+    width: 30%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fefefe;
+}
+
+.update-service-modal-header {
+    padding: 10px 15px;
+    background-color: #f9f9f9;
+    color: #353535;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.close-update-service-modal {
+    color: #202020;
+    font-size: 28px;
+    cursor: pointer;
+}
+.close-update-service-modal:hover {
+    color: #1f65fb;
+}
+
+.update-service-form-container {
+    padding: 10px 30px;
+    margin: 10px 0;
+    background-color: #fefefe;
+    min-height: 250px;
+    max-height: 250px;
+}
+.update-service-form-container label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #202020;
+}
+.update-service-form-container input {
+    background-color: #f9f9f9;
+    border: 1px solid #DDDDDD;
+    margin: 8px 0;
+    padding: 10px 15px;
+    font-size: 13px;
+    border-radius: 8px;
+    width: 100%;
+    outline: none;
+}
+
+.update-service-modal-footer {
+    padding: 10px;
+    background-color: #f9f9f9;
+    text-align: right;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top: 1px solid #DDDDDD;
+}
+
+
+.update-service-btn {
+    padding: 10px 20px;
+    background-color: #1f65fb;
+    border: 1px solid #555;
+    transition: background-color 0.3s ease;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.update-service-btn:hover {
+    background-color: #edf4ff;
+    border: 1px solid #1f65fb;
+    color: #1f65fb;
+}
+
+
+
+
+
+.delete-service-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.delete-service-modal-content {
+    position: relative;
+    background-color: #fff;
+    margin: 15% auto;
+    border-radius: 10px;
+    width: 350px;
+    min-height: 180px;
+    text-align: center;
+}
+
+.delete-service-modal-header {
+    padding: 10px 15px;
+    color: #353535;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 1px solid #DDDDDD;
+}
+.delete-service-modal-body p {
+    margin: 10px;
+    font-size: 14px;
+}
+
+.delete-service-modal-footer {
+    margin-top: 15px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    border-top: 1px solid #DDDDDD;
+}
+
+.delete-service-modal-close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.delete-service-modal-close-btn:hover,
+.delete-service-modal-close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.delete-service-modal-footer .btn-danger {
+    padding: 10px 20px;
+    background-color: #fb1f1f;
+    border: 1px solid #555;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-service-modal-footer .btn-danger:hover {
+    background-color: #edf4ff;
+    border: 1px solid #fb1f1f;
+    color: #fb1f1f;
+}
+
+

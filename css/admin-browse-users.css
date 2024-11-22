@@ -1,0 +1,250 @@
+body{
+    background-color: #F9F9F9;
+    overflow: hidden;
+}
+
+
+.admin-browse-users{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: calc(100% - 29%);
+    height: 87vh;
+    margin: 10px;
+    margin-left: 90px;
+    background-color: #F9F9F9;
+    border: 1px solid #DDDDDD;
+    overflow-x: auto;
+}
+.admin-browse-users::-webkit-scrollbar {
+    width: 0;
+}
+
+
+
+.search-bar-container{
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    width: 100%;
+}
+.search-bar-container .search{
+    width: 30%;
+    margin: 20px 0;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #DDDDDD;
+    border-radius: 5px;
+    background-color: #eeeeee84;
+    backdrop-filter: blur(5px);
+  }
+  .search-bar-container .search .text{
+    font-size: 13px;
+    color: #353535;
+    margin-left: 15px;
+  }
+  .search-bar-container .search input{
+    position: absolute;
+    height: 42px;
+    width: 100%;
+    font-size: 13px;
+    padding: 0 20px;
+    border-radius: 5px 0 0 5px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+  }
+  .search-bar-container .search input.show{
+    opacity: 1;
+    background-color: #f5f5f5;
+  }
+  .search-bar-container .search button{
+    position: relative;
+    z-index: 1;
+    width: 50px;
+    height: 42px;
+    font-size: 13px;
+    cursor: pointer;
+    font-size: 13px;
+    border-radius: 0 5px 5px 0;
+    transition: all 0.2s ease;
+  }
+  .search-bar-container .search button:hover{
+    background-color: rgb(127, 127, 127);
+    color: #fff;
+  }
+  .search-bar-container .search button.active{
+    background-color: rgb(127, 127, 127);
+    color: #fff;
+  }
+  .search button.active i::before{
+    content: '\f00d';
+  }
+  .noUserOnSearch{
+    font-size: 13px;
+    padding: 0 20px;
+  }
+
+
+
+.user-list-container{
+  position: relative;
+  width: 95%;
+  min-height: 71vh;
+  max-height: 71vh;
+  overflow-y: auto;
+  outline: 1px solid #DDDDDD;
+}
+.user-list{
+  width: 100%;
+  max-height: 71vh;
+  overflow-y: auto;
+  outline: 1px solid #DDDDDD;
+}
+.user-list-container::-webkit-scrollbar, .user-list::-webkit-scrollbar {
+  width: 0;
+}
+.user-details-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 60px;
+  padding-left: 20px;
+  border-bottom: 1px solid #DDDDDD;
+}
+.user-details{
+  display: flex;
+  align-items: center;
+}
+.user-details img{
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+.user-info{
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.user-info h3{
+  font-size: 14px;
+  font-weight: 700;
+  color: #202020;  
+}
+.user-info p{
+  font-size: 12px;
+  color: #353535;  
+  font-style: italic;
+}
+.user-details-buttons{
+  display: flex;
+  align-items: center;
+}
+.button-box{
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-left: 1px solid #DDDDDD;
+}
+.button-box:hover{
+  border-bottom: 1px solid #DDDDDD;
+  background-color: #edf4ff;
+  color: #1f65fb;
+}
+.button-box i{
+  font-size: 17px;
+}
+.button-box img{
+  height: 20px;
+  width: 20px;
+}
+.button-box i:hover, 
+.button-box img:hover{
+  scale: 1.1;
+}
+
+.no-user-results{
+  padding: 20px;
+  font-size: 14px;
+  color: #202020;
+}
+.restrict-button{
+  color: #fb1f1f;
+}
+.button-box i.unrestrict-button{
+  color: #1f65fb;
+  font-size: 20px;
+}
+
+
+.user-list-filter-container{
+    position: absolute;
+    top: 64px;
+    right: 0;
+    width: calc(29% - 100px);
+    height: 90vh;
+    background-color: #F9F9F9;
+    border: 1px solid #DDDDDD;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+
+
+
+.filter-user-list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.filter-toggle-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.filter-selection {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-selection select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 13px;
+    border: 1px solid #DDDDDD;
+    border-radius: 8px;
+    background-color: #F1F1F1;
+    outline: none;
+    transition: border 0.3s;
+}
+
+.filter-selection select:focus {
+    border: 1px solid #000;
+}
+
+select option {
+    padding: 10px;
+}
+
+h1 {
+    font-size: 18px;
+    font-weight: 600;
+}
+

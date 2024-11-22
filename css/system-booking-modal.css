@@ -1,0 +1,165 @@
+
+
+.booking-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.booking-modal.list {
+    background-color: transparent;
+}
+
+.booking-container {
+    position: absolute;
+    top: 12%;
+    left: 33%;
+    width: 500px;
+    height: auto; /* Allows dynamic height depending on the content */
+    overflow: hidden;
+    background: #F9F9F9;
+    border-radius: 10px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .12);
+}
+
+.booking-container-header {
+    padding: 10px 15px;
+    background-color: #F9F9F9;
+    color: #353535;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.booking-close-btn {
+    color: #202020;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.booking-close-btn:hover {
+    color: #1f65fb;
+}
+.booking-details-container{
+    padding: 15px 35px 35px 35px;
+}
+.booking-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+    padding: 10px 20px;
+    outline: 1px solid #DDDDDD;
+    min-height: 145px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.booking-details-info {
+    width: 100%;
+    margin-bottom: 15px;
+}
+.booking-details-user-info{
+    display: flex;
+    align-items: center;
+}
+.booking-details-user-info img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.booking-details-user-info .details {
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.booking-details-user-info .details h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #202020;
+}
+
+.booking-details-user-info .details p {
+    font-size: 12px;
+    font-weight: 400;
+    color: #65676b;
+    font-style: italic;
+}
+.booking-info{
+    margin-bottom: 10px;
+}
+.booking-info p{
+    font-size: 12px;
+    color: #202020;
+    margin: 5px 0;
+}
+.job-type-container, .payment-container {
+    padding: 10px 0;
+    border-top: 1px solid #DDDDDD;
+}
+
+.job-type-container p, .payment-container p {
+    font-size: 12px;
+    font-weight: 400;
+    color: #202020;
+    margin-bottom: 8px;
+}
+
+/* Job Type and Payment Options Styling */
+.job-type-options {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.job-type-options label {
+    display: flex;
+    align-items: center;
+    color: #202020;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.job-type-options input[type="radio"] {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.job-type-options label:hover{
+    color: #1f65fb;
+}
+
+
+.booking-details-btn{
+    width: 100%;
+    margin-top: 10px;
+}
+.btn-booking {
+    width: 100%;
+    background-color: #1f65fb;
+    color: white;
+    font-size: 14px;
+    padding: 10px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.btn-booking:hover {
+    background-color: #edf4ff;
+    outline: 1px solid #DDDDDD;
+    color: #1f65fb;
+}

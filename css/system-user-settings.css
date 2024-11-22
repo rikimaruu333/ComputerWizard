@@ -1,0 +1,274 @@
+
+
+
+/* Modal Styling */
+.settings-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.settings-container {
+    background-color: #F9F9F9;
+    max-width: 55%;
+    height: 500px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    margin: 50px auto;
+    border: 1px solid #DDDDDD;
+    overflow: hidden;
+}
+
+.settings-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px solid #DDDDDD;
+    background-color: #F9F9F9;
+}
+
+.settings-header h2 {
+    margin: 0;
+    font-size: 17px;
+    color: #202020;
+}
+
+.close-settings-modal {
+    color: #202020;
+    font-size: 28px;
+    cursor: pointer;
+}
+.close-settings-modal:hover {
+    color: #1f65fb;
+}
+
+.settings-body {
+    display: flex;
+    height: 100%;
+    background-color: #F9F9F9;
+}
+.settings-body form {
+    width: 100%;
+}
+
+.settings-sidebar {
+    padding-top: 10px;
+    width: 27%;
+    border-right: 1px solid #DDDDDD;
+    background-color: #F9F9F9;
+}
+
+.settings-sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.settings-sidebar ul li {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    padding: 15px 20px;
+    cursor: pointer;
+    color: #353535;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.settings-sidebar ul li i{
+    margin-right: 10px;
+    margin-bottom: 2px;
+    opacity: 0.8;
+}
+
+.settings-sidebar ul li:hover {
+    background-color: #f0f0f0;
+    color: #1f65fb; 
+}
+
+.settings-sidebar ul li.active {
+    font-weight: bold;
+    color: #1f65fb;
+    background-color: #edf4ff; 
+    border-right: 4px solid #1f65fb; 
+    pointer-events: none;
+}
+
+
+.profile-settings-content {
+    width: 75%;
+    padding: 20px;
+    color: #353535;
+}
+.profile-section{
+    max-height: 200px;
+}
+.profile-section h3 {
+    color: #202020;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.profile-picture {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #DDDDDD;
+    padding-bottom: 10px;
+}
+
+.profile-picture img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-right: 10px;
+    border: 1px solid #DDDDDD;
+}
+
+.profile-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-buttons button {
+    margin-bottom: 5px;
+    background-color: #edf4ff;
+    color: #353535;
+    border: 1px solid #DDDDDD;
+    border-radius: 5px;
+    padding: 7px 10px;
+    transition: all 0.2s ease;
+}
+.profile-buttons .btn-change:hover {
+    background-color: #1f65fb;
+    color: white;
+    border: 1px solid transparent;
+}
+
+.profile-buttons .btn-delete:hover {
+    background-color: #e72034da;
+    color: white;
+    border: 1px solid transparent;
+}
+
+.profile-details{
+    position: relative;
+    max-height: 260px;
+    overflow-y: auto;
+    padding: 15px;
+    padding-top: 0;
+}
+.profile-details::-webkit-scrollbar{
+    width: 0;
+}
+.profile-details label {
+    display: block;
+    margin-top: 25px;
+    font-size: 14px;
+    color: #202020;
+}
+
+.profile-details input,
+.profile-details select,
+.profile-details textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #DDDDDD;
+    border-radius: 5px;
+    background-color: #F9F9F9;
+}
+
+.profile-details p {
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    cursor: not-allowed;
+    color: #1f65fb;
+    font-size: 12px;
+    font-style: italic;
+}
+.profile-details p i{
+    margin: 0 5px 2px 0;
+}
+
+
+.account-settings-content {
+    display: none; 
+    padding: 20px;
+    width: 75%;
+    color: #353535;
+}
+
+.account-section h3 {
+    color: #202020;
+}
+
+.account-details {
+    position: relative;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+.account-details label {
+    display: block;
+    margin-top: 25px;
+    font-size: 14px;
+    color: #202020;
+}
+.account-details label[for="confirmPassword"] {
+    margin-top: 5px;
+}
+
+.account-details input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #DDDDDD;
+    border-radius: 5px;
+    background-color: #F9F9F9;
+}
+
+.account-details p{
+    cursor: not-allowed;
+    visibility: hidden;
+    color: rgb(210, 16, 16);
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+    font-style: italic;
+}
+
+
+.btn-save {
+    margin-top: 20px;
+    width: 100%;
+    height: 40px;
+    color: #F9F9F9;
+    background-color: #1f65fb;
+    border: 1px solid #555;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-save:hover {
+    background-color: #edf4ff;
+    border: 1px solid #1f65fb;
+    color: #1f65fb;
+}
+
+#updateAccountSettingsBtn{
+    margin-top: 19px;
+}
