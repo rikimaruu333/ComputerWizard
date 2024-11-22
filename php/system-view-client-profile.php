@@ -81,7 +81,6 @@
             <div class="post-transaction-container">
                 <div class="post-transaction-container-toggle">
                     <div class="toggle-post active"><p>POSTS</p></div>
-                    <div class="toggle-transaction "><p>TRANSACTIONS</p></div>
                 </div>
 
                 <div class="posts-container">
