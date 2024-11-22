@@ -21,6 +21,7 @@ function usersignup($data) {
                       date = :date, 
                       address = :address,
                       phone = :phone,
+                      age = :age,
                       gender = :gender,
                       profile = :profile,
                       status = :status 
@@ -33,6 +34,7 @@ function usersignup($data) {
         $arr['date'] = date("Y-m-d");
         $arr['address'] = $data['address'];
         $arr['phone'] = $data['phone'];
+        $arr['age'] = $data['age'];
         $arr['gender'] = $data['gender'];
         $arr['profile'] = $data['profile'];
         $arr['status'] = $data['status']; 
@@ -54,6 +56,7 @@ function usersignup($data) {
             $arr['date'] = date("Y-m-d");
             $arr['address'] = $data['address'];
             $arr['phone'] = $data['phone'];
+            $arr['age'] = $data['age'];
             $arr['gender'] = $data['gender'];
             $arr['profile'] = $data['profile'];
             $arr['status'] = $data['status'];
@@ -93,8 +96,8 @@ function usersignup($data) {
 
             // Proceed with registration if there are no errors
             if (empty($errors)) {
-                $query = "INSERT INTO users (unique_id, usertype, firstname, lastname, email, password, date, address, phone, gender, profile, status, valid_id) 
-                          VALUES (:unique_id, :usertype, :firstname, :lastname, :email, :password, :date, :address, :phone, :gender, :profile, :status, :valid_id)";
+                $query = "INSERT INTO users (unique_id, usertype, firstname, lastname, email, password, date, address, phone, age, gender, profile, status, valid_id) 
+                          VALUES (:unique_id, :usertype, :firstname, :lastname, :email, :password, :date, :address, :phone, :age, :gender, :profile, :status, :valid_id)";
                 
                 userdata($query, $arr);
                 return [];

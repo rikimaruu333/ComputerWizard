@@ -167,6 +167,7 @@ canvas{
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    min-height: 68vh;
     max-height: 68vh;
     border-bottom: 1px solid #DDDDDD;
 }

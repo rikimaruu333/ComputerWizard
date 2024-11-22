@@ -186,12 +186,12 @@
                                 <img src="" alt="Profile Image" id="registrationModalProfileImage">
                             </div>
                             <div class="freelancer-request-buttons">
-                                <div class="button-container">
-                                    <i class="bx bxs-user-x reject-button" id="freelancerRegistrationRejectBtn" ></i>
+                                <div class="button-container"  id="freelancerRegistrationRejectBtn" >
+                                    <i class="bx bxs-user-x reject-button"></i>
                                     <span>Reject</span>
                                 </div>
-                                <div class="button-container">
-                                    <i class="bx bxs-user-check approve-button" id="freelancerRegistrationApproveBtn"></i>
+                                <div class="button-container"  id="freelancerRegistrationApproveBtn">
+                                    <i class="bx bxs-user-check approve-button"></i>
                                     <span>Approve</span>
                                 </div>
                             </div>
