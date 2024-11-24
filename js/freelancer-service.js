@@ -42,12 +42,13 @@ $(document).ready(function() {
 
     // Function to append a service to the table
     function appendServiceToTable(service) {
+        let formattedRate = parseFloat(service.service_rate).toFixed(2); // Format to 2 decimal places
         let serviceRow = `
             <tr id="service-${service.service_id}" data-id="${service.service_id}">
                 <td>${service.service}</td>
-                <td>₱${service.service_rate}</td>
+                <td>₱${formattedRate}</td>
                 <td class="service-config">
-                    <u class="service-edit-config" data-id="${service.service_id}" data-name="${service.service}" data-rate="${service.service_rate}">Edit</u> |
+                    <u class="service-edit-config" data-id="${service.service_id}" data-name="${service.service}" data-rate="${formattedRate}">Edit</u> |
                     <u class="service-delete-config" data-id="${service.service_id}">Delete</u>
                 </td>
             </tr>
@@ -77,6 +78,19 @@ $(document).ready(function() {
                 toastr.error('Failed to fetch services. Please try again.');
             }
         });
+    }); 
+
+    // Restrict serviceRate input to integers only
+    $('#serviceRate').on('input', function() {
+        let value = $(this).val();
+        // Replace any non-numeric characters
+        $(this).val(value.replace(/[^0-9]/g, ''));
+    });
+    // Restrict serviceRate input to integers only
+    $('#updateServiceRate').on('input', function() {
+        let value = $(this).val();
+        // Replace any non-numeric characters
+        $(this).val(value.replace(/[^0-9]/g, ''));
     });
 
     // Add Service - Realtime update
@@ -88,6 +102,12 @@ $(document).ready(function() {
 
         if (serviceName === "" || serviceRate === "") {
             toastr.error('Please fill in all fields');
+            return;
+        }
+
+        // Ensure the rate is a valid integer
+        if (!/^\d+$/.test(serviceRate)) {
+            toastr.error('Rate must be a valid rate.');
             return;
         }
 
@@ -143,6 +163,12 @@ $(document).ready(function() {
 
         if (serviceName === "" || serviceRate === "") {
             toastr.error('Please fill in all fields');
+            return;
+        }
+        
+        // Ensure the rate is a valid integer
+        if (!/^\d+$/.test(serviceRate)) {
+            toastr.error('Rate must be a valid rate.');
             return;
         }
 

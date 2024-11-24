@@ -2,7 +2,6 @@
 
 session_start();
 
-
 function usersignup($data) {
     $errors = array();
     
@@ -24,7 +23,8 @@ function usersignup($data) {
                       age = :age,
                       gender = :gender,
                       profile = :profile,
-                      status = :status 
+                      status = :status,
+                      valid_id_type = :valid_id_type 
                   WHERE email = :email AND status = 2";
 
         $arr['usertype'] = $data['usertype'];
@@ -38,6 +38,7 @@ function usersignup($data) {
         $arr['gender'] = $data['gender'];
         $arr['profile'] = $data['profile'];
         $arr['status'] = $data['status']; 
+        $arr['valid_id_type'] = $data['valid_id_type'];
 
         if (count($errors) == 0) {
             userdata($query, $arr);
@@ -60,6 +61,7 @@ function usersignup($data) {
             $arr['gender'] = $data['gender'];
             $arr['profile'] = $data['profile'];
             $arr['status'] = $data['status'];
+            $arr['valid_id_type'] = $data['valid_id_type'];
 
             // Check if usertype is Freelancer and if file is provided
             if ($data['usertype'] == 'Freelancer') {
@@ -96,8 +98,8 @@ function usersignup($data) {
 
             // Proceed with registration if there are no errors
             if (empty($errors)) {
-                $query = "INSERT INTO users (unique_id, usertype, firstname, lastname, email, password, date, address, phone, age, gender, profile, status, valid_id) 
-                          VALUES (:unique_id, :usertype, :firstname, :lastname, :email, :password, :date, :address, :phone, :age, :gender, :profile, :status, :valid_id)";
+                $query = "INSERT INTO users (unique_id, usertype, firstname, lastname, email, password, date, address, phone, age, gender, profile, status, valid_id, valid_id_type) 
+                          VALUES (:unique_id, :usertype, :firstname, :lastname, :email, :password, :date, :address, :phone, :age, :gender, :profile, :status, :valid_id, :valid_id_type)";
                 
                 userdata($query, $arr);
                 return [];

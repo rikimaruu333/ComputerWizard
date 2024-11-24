@@ -1,6 +1,9 @@
 <?php
     require "formfunctions.php";
     usercheck_login();
+    
+    if($_SESSION['USER']->usertype !== 'Admin' && $_SESSION['USER']->usertype !== 'Freelancer') header("Location: client-dashboard.php");
+    if($_SESSION['USER']->usertype !== 'Admin' && $_SESSION['USER']->usertype !== 'Client') header("Location: freelancer-dashboard.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -190,7 +193,7 @@
                                     <i class="bx bxs-user-x reject-button"></i>
                                     <span>Reject</span>
                                 </div>
-                                <div class="button-container"  id="freelancerRegistrationApproveBtn">
+                                <div class="button-container" id="frelancerRegistrationValidationBtn">
                                     <i class="bx bxs-user-check approve-button"></i>
                                     <span>Approve</span>
                                 </div>
@@ -198,9 +201,29 @@
                         </div>
                     </div>
                     <div class="freelancer-request-valid-id">
-                        <h3>Presented Valid ID</h3>
+                        <div class="valid-id-details">
+                            <h3>Presented Valid ID</h3>
+                            <p>ID type: <span id="registrationModalValidIDType"></span></p>
+                            <p>Date submitted: <span id="registrationModalRegistrationDate"></span></p>
+                        </div>
                         <img src="" alt="Valid ID" id="registrationModalValidID" style="width: 100%;">
                     </div>
+                    <!-- Modal Structure -->
+                    <div id="validateIdModal" class="validate-id-modal">
+                        <div class="validate-id-modal-content">
+                            <div class="validate-id-modal-content-header">
+                                <h3>Validate ID</h3>
+                                <span class="close-btn">&times;</span>
+                            </div>
+                            <form id="validateIdForm">
+                                <input type="text" id="valid_id_type" name="valid_id_type" placeholder="Enter valid ID type" required>
+                                <input type="text" id="fullname" name="fullname" placeholder="Enter the ID's full name" required>
+                                <button type="submit" id="freelancerRegistrationApproveBtn">Finalize Approval</button>
+                            </form>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>

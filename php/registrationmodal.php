@@ -151,7 +151,42 @@
                         </div>
                     </div>
                     <div class="details">
+                        <div class="select-id-type-container">
+                            <select name="valid_id_type" id="valid_id_type">
+                                <option value="" disabled selected>Select an ID</option>
+                                <option value="ACR/ICR">ACR/ICR</option>
+                                <option value="Barangay Certification">Barangay Certification</option>
+                                <option value="Driver’s License">Driver’s License</option>
+                                <option value="City Health Card/Health Certificate Card">City Health Card/Health Certificate Card</option>
+                                <option value="GSIS e-Card">GSIS e-Card</option>
+                                <option value="Company ID">Company ID</option>
+                                <option value="Integrated Bar of the Philippines">Integrated Bar of the Philippines</option>
+                                <option value="DSWD Certification">DSWD Certification</option>
+                                <option value="Maritime Industry Authority (MARINA) ID">Maritime Industry Authority (MARINA) ID</option>
+                                <option value="GOCC ID">GOCC ID</option>
+                                <option value="NCDA ID">NCDA ID</option>
+                                <option value="NBI Clearance">NBI Clearance</option>
+                                <option value="Passport">Passport</option>
+                                <option value="OFW ID">OFW ID</option>
+                                <option value="Postal ID">Postal ID</option>
+                                <option value="OWWA ID">OWWA ID</option>
+                                <option value="PRC ID">PRC ID</option>
+                                <option value="Pag-IBIG Loyalty Card">Pag-IBIG Loyalty Card</option>
+                                <option value="School ID">School ID</option>
+                                <option value="PhilHealth Insurance Card ng Bayan (PHICB)">PhilHealth Insurance Card ng Bayan (PHICB)</option>
+                                <option value="Senior Citizen Card">Senior Citizen Card</option>
+                                <option value="Police Clearance">Police Clearance</option>
+                                <option value="SSS Card">SSS Card</option>
+                                <option value="Postal ID (Paper-based card)">Postal ID (Paper-based card)</option>
+                                <option value="Unified Multi-purpose ID">Unified Multi-purpose ID</option>
+                                <option value="Seaman’s Book">Seaman’s Book</option>
+                                <option value="Voter’s ID">Voter’s ID</option>
+                                <option value="Tax Identification Number (TIN)">Tax Identification Number (TIN)</option>
+                                <option value="Philippine Identification System (PhilSys) ID">Philippine Identification System (PhilSys) ID</option>
+                            </select>
+                        </div>
                         <span class="title">Attach valid ID</span>
+
                         <div class="fields">
                             <div class="upload-files">
                                 <div class="file-upload-wrapper">

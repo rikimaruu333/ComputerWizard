@@ -1,6 +1,9 @@
 <?php
     require "formfunctions.php";
     usercheck_login();
+
+    if($_SESSION['USER']->usertype !== 'Freelancer' && $_SESSION['USER']->usertype !== 'Admin') header("Location: client-dashboard.php");
+    if($_SESSION['USER']->usertype !== 'Freelancer' && $_SESSION['USER']->usertype !== 'Client') header("Location: admin-dashboard.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">

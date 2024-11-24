@@ -117,6 +117,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         $('#registrationModalPhone').text(freelancerData.phone);
                         $('#registrationModalEmail').text(freelancerData.email);
                         $('#registrationModalGender').text(freelancerData.gender);
+                        $('#registrationModalValidIDType').text(freelancerData.valid_id_type); // Update this field based on your data structure
+                        $("#valid_id_type").val(freelancerData.valid_id_type);
+                        $('#registrationModalRegistrationDate').text(freelancerData.date); // Update this field based on your data structure
                         $('#registrationModalValidID').attr('src', freelancerData.valid_id); // Update this field based on your data structure
                         $('#freelancerRegistrationApproveBtn').attr('data-freelancer-id', freelancerData.id); // Update this field based on your data structure
                         $('#freelancerRegistrationRejectBtn').attr('data-freelancer-id', freelancerData.id); // Update this field based on your data structure
@@ -137,16 +140,35 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    $(document).on('click', '#freelancerRegistrationApproveBtn', function () {
-        // Get freelancer ID (ensure this is passed when the modal opens)
-        const freelancerId = $(this).data('freelancer-id');
+    // Get elements
+    const validateIdModalmodal = document.getElementById("validateIdModal");
+    const openValidateIdModalButton = document.getElementById("frelancerRegistrationValidationBtn");
+    const closeValidateIdModalButton = document.querySelector("#validateIdModal .close-btn");
+
+    // Open the modal when "Validate ID" button is clicked
+    openValidateIdModalButton.addEventListener("click", () => {
+        validateIdModalmodal.style.display = "flex";
+    });
+
+    // Close the modal when the close button is clicked
+    closeValidateIdModalButton.addEventListener("click", () => {
+        validateIdModalmodal.style.display = "none";
+    });
+        
+    // Handle form submission for validation
+    $(document).on("submit", "#validateIdForm", function (e) {
+        e.preventDefault();
+
+        const freelancerId = $("#freelancerRegistrationApproveBtn").data("freelancer-id");
+        const validIdType = $("#valid_id_type").val();
+        const fullName = $("#fullname").val();
 
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You are approving this freelancer.",
-            icon: 'question',
+            title: "Are you sure?",
+            text: "You are finalizing this freelancer's approval.",
+            icon: "question",
             showCancelButton: true,
-            confirmButtonText: 'Yes, approve!',
+            confirmButtonText: "Yes, approve!",
             customClass: {
                 popup: 'small-swal-popup',
                 icon: 'small-swal-icon',
@@ -155,26 +177,33 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }).then((result) => {
             if (result.isConfirmed) {
-                // AJAX request to approve the freelancer
+                // AJAX request to insert validation details and approve freelancer
                 $.ajax({
-                    url: 'admin-freelancer-confirmation.php',
-                    type: 'POST',
+                    url: "admin-freelancer-confirmation.php",
+                    type: "POST",
                     data: {
                         freelancer_id: freelancerId,
-                        status: 1, // Status for approved
+                        id_type: validIdType,
+                        id_full_name: fullName,
+                        status: 1, // Approved status
                     },
                     success: function (response) {
-                        Swal.fire('Approved!', 'The freelancer has been approved.', 'success');
-                        $('#freelancerRegistrationModal').hide(); // Close modal
-                        // Optionally, refresh the list or remove the approved freelancer
+                        const res = JSON.parse(response);
+                        if (res.success) {
+                            Swal.fire("Approved!", "The freelancer has been approved.", "success");
+                            validateIdModal.style.display = "none"; // Close modal
+                        } else {
+                            Swal.fire("Error!", res.error || "An unknown error occurred.", "error");
+                        }
                     },
-                    error: function (xhr, status, error) {
-                        Swal.fire('Error!', 'Failed to approve the freelancer.', 'error');
+                    error: function () {
+                        Swal.fire("Error!", "Failed to approve the freelancer.", "error");
                     },
                 });
             }
         });
     });
+
 
     $(document).on('click', '#freelancerRegistrationRejectBtn', function () {
         // Get freelancer ID (ensure this is passed when the modal opens)
