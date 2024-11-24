@@ -40,7 +40,7 @@ function populateFreelancerList(freelancers) {
                     <div class="button-box" title="Hover icon to check status.">
                         ${scheduleIcon} 
                     </div>
-                    <div class="button-box" title="Send Message">
+                    <div class="button-box send-message-btn" title="Send Message">
                         <i class="bx bx-message"></i>
                     </div>
                     <div class="button-box view-profile-btn" title="View Profile" data-freelancer-id="${freelancer.id}">
@@ -56,6 +56,14 @@ function populateFreelancerList(freelancers) {
     $('.view-profile-btn').on('click', function() {
         var freelancerId = $(this).data('freelancer-id');
         window.location.href = `system-view-freelancer-profile.php?freelancer_id=${freelancerId}`;
+    });
+    
+    // Send Message button click
+    $('.send-message-btn').on('click', function() {
+        // var userId = $(this).data('user-id');
+        
+        // Redirect to messaging page
+        window.location.href = `client-messaging.php`;
     });
 }
 
@@ -121,7 +129,7 @@ function renderFreelancers(freelancers) {
                         <div class="button-box" title="Hover icon to check status.">
                             ${scheduleIcon} 
                         </div>
-                        <div class="button-box" title="Send Message">
+                        <div class="button-box send-message-btn" title="Send Message">
                             <i class="bx bx-message"></i>
                         </div>
                         <div class="button-box view-profile-btn" title="View Profile" data-freelancer-id="${freelancer.id}">
@@ -140,6 +148,14 @@ function renderFreelancers(freelancers) {
     $('.view-profile-btn').on('click', function() {
         var freelancerId = $(this).data('freelancer-id');
         window.location.href = `system-view-freelancer-profile.php?freelancer_id=${freelancerId}`;
+    });
+    
+    // Send Message button click
+    $('.send-message-btn').on('click', function() {
+        // var userId = $(this).data('user-id');
+        
+        // Redirect to messaging page
+        window.location.href = `client-messaging.php`;
     });
 }
 

@@ -18,7 +18,26 @@ try {
     $row = $stmt->fetch(PDO::FETCH_OBJ);
 
     if ($row) {
-        // Send user details back to the front end
+        // Default transaction count
+        $transactionCount = 0;
+
+        // Check the user type and fetch transaction count accordingly
+        if ($usertype === 'Client') {
+            $transactionStmt = $newconnection->openConnection()->prepare("SELECT COUNT(*) AS transaction_count FROM booking WHERE client_id = :client_id AND booking_status = 'Completed'");
+            $transactionStmt->bindParam(':client_id', $row->id);
+        } elseif ($usertype === 'Freelancer') {
+            $transactionStmt = $newconnection->openConnection()->prepare("SELECT COUNT(*) AS transaction_count FROM booking WHERE freelancer_id = :freelancer_id AND booking_status = 'Completed'");
+            $transactionStmt->bindParam(':freelancer_id', $row->id);
+        }
+
+        // Execute the statement if a valid user type is provided
+        if (isset($transactionStmt)) {
+            $transactionStmt->execute();
+            $transactionData = $transactionStmt->fetch(PDO::FETCH_ASSOC);
+            $transactionCount = $transactionData['transaction_count'];
+        }
+
+        // Send user details back to the front end along with the transaction count
         echo json_encode([
             'status' => 'success',
             'id' => htmlspecialchars($row->id),
@@ -29,7 +48,8 @@ try {
             'email' => htmlspecialchars($row->email),  // Email
             'phone' => htmlspecialchars($row->phone),  // Phone
             'usertype' => $usertype,  // User type ('freelancer', 'client')
-            'incoming_id' => $id  // Incoming ID used for chat
+            'incoming_id' => $id,  // Incoming ID used for chat
+            'transaction_count' => $transactionCount  // Include transaction count
         ]);
     } else {
         echo json_encode(['status' => 'error', 'message' => 'User not found']);
@@ -37,3 +57,4 @@ try {
 } catch (PDOException $e) {
     echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
 }
+

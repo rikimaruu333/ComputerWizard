@@ -56,7 +56,15 @@
                             <h3 id="fullName"></h3>
                             <button id="viewProfileOpenServiceModalBtn"><i class="bx bxs-briefcase"></i><p>View Services</p></button>
                             <button id="viewProfileOpenScheduleModalBtn"><i class="bx bxs-calendar"></i><p>View Schedules</p></button>
-                            <button id=""><i class="bx bxs-message-square-dots"></i><p>Message</p></button>
+                            <?php if($_SESSION['USER']->usertype == "Admin"){?>
+                            <button id="adminSendMessageBtn"><i class="bx bxs-message-square-dots"></i><p>Message</p></button>
+                            <?php } ?>
+                            <?php if($_SESSION['USER']->usertype == "Client"){?>
+                            <button id="clientSendMessageBtn"><i class="bx bxs-message-square-dots"></i><p>Message</p></button>
+                            <?php } ?>
+                            <?php if($_SESSION['USER']->usertype == "Freelancer"){?>
+                            <button id="freelancerSendMessageBtn"><i class="bx bxs-message-square-dots"></i><p>Message</p></button>
+                            <?php } ?>
                         </div>
                         <i id="email"></i>
                         <span><i class="bx bx-like"></i> <span class="recommendation-count">0 recommendations</span></span>

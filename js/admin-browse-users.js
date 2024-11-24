@@ -41,7 +41,7 @@ function populateUserList(users) {
                     <div class="button-box" title="Hover icon to check restriction status.">
                         ${restrictionIcon}
                     </div>
-                    <div class="button-box" title="Send Message">
+                    <div class="button-box send-message-btn" title="Send Message" data-user-id="${user.id}">
                         <i class="bx bx-message"></i>
                     </div>
                     <div class="button-box view-profile-btn" title="View Profile" data-user-id="${user.id}" data-user-type="${user.usertype}">
@@ -63,6 +63,14 @@ function populateUserList(users) {
         } else if (userType === 'Client') {
             window.location.href = `system-view-client-profile.php?client_id=${userId}`;
         }
+    });
+    
+    // Send Message button click
+    $('.send-message-btn').on('click', function() {
+        // var userId = $(this).data('user-id');
+        
+        // Redirect to messaging page
+        window.location.href = `admin-messaging.php`;
     });
 }
 
@@ -131,8 +139,8 @@ function renderUsers(users) {
                         <div class="button-box" title="Hover icon to check restriction status.">
                             ${restrictionIcon} 
                         </div>
-                        <div class="button-box" title="Send Message">
-                            <i class="bx bx-message"></i>
+                        <div class="button-box send-message-btn" title="Send Message" data-user-id="${user.id}">
+                            <i class="bx bx-message" title="Send Message"></i>
                         </div>
                         <div class="button-box view-profile-btn" title="View Profile" data-user-id="${user.id}" data-user-type="${user.usertype}">
                             <i class="bx bx-search" title="View Profile"></i>
@@ -157,6 +165,15 @@ function renderUsers(users) {
             window.location.href = `system-view-client-profile.php?client_id=${userId}`;
         }
     });
+
+    // Send Message button click
+    $('.send-message-btn').on('click', function() {
+        // var userId = $(this).data('user-id');
+        
+        // Redirect to messaging page
+        window.location.href = `admin-messaging.php`;
+    });
+
 }
 
 // Trigger search and filters on change

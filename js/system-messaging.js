@@ -79,6 +79,7 @@ $(document).ready(function() {
                 const email = response.email; // User email
                 const phone = response.phone; // User phone number
                 const userId = response.id; // User phone number
+                const transactionCount = response.transaction_count; // User phone number
 
                 if (response.usertype === 'Freelancer') {
                     // Build freelancer info
@@ -102,7 +103,7 @@ $(document).ready(function() {
                         <div class="freelancer-user-transactions">
                             <i class="bx bx-transfer-alt"
                             "></i>
-                            <p id="freelancer-user-transactions">21 transactions</p>
+                            <p id="freelancer-user-transactions">${transactionCount} transactions</p>
                         </div>
                         <div class="freelancer-user-recommendation">
                             <i class="fas fa-thumbs-up"></i>
@@ -141,7 +142,7 @@ $(document).ready(function() {
                         <div class="client-user-transactions">
                             <i class="bx bx-transfer-alt"
                             "></i>
-                            <p id="client-user-transactions">21 transactions</p>
+                            <p id="freelancer-user-transactions">${transactionCount} transactions</p>
                         </div>
                         <div class="client-user-jobposts">
                             <i class="bx bxs-book-content"></i>

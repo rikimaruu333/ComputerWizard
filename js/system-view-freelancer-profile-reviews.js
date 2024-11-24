@@ -35,6 +35,28 @@ function fetchFreelancerReviews(freelancerId) {
     });
 }
 
+// Send Message button click
+$('#adminSendMessageBtn').on('click', function() {
+    // var userId = $(this).data('user-id');
+    
+    // Redirect to messaging page
+    window.location.href = `admin-messaging.php`;
+});
+// Send Message button click
+$('#clientSendMessageBtn').on('click', function() {
+    // var userId = $(this).data('user-id');
+    
+    // Redirect to messaging page
+    window.location.href = `client-messaging.php`;
+});
+// Send Message button click
+$('#freelancerSendMessageBtn').on('click', function() {
+    // var userId = $(this).data('user-id');
+    
+    // Redirect to messaging page
+    window.location.href = `freelancer-messaging.php`;
+});
+
 function populateReviews(reviews) {
     const container = $('.freelancer-review-container');
     container.empty();  // Clear existing content

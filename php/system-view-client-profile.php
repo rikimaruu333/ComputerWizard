@@ -53,6 +53,18 @@
                     <div class="client-details">
                         <div class="client-name-post-button">
                             <h3 id="fullName"></h3>
+                            <?php if($_SESSION['USER']->usertype == "Admin"){?>
+                            <button id="adminSendMessageBtn"><i class="bx bxs-message-square-dots"></i><p>Message</p></button>
+                            <?php } ?>
+                            <?php if($_SESSION['USER']->usertype == "Client"){?>
+                            <button id="clientSendMessageBtn"><i class="bx bxs-message-square-dots"></i><p>Message</p></button>
+                            <?php } ?>
+                            <?php if($_SESSION['USER']->usertype == "Freelancer"){?>
+                            <button id="freelancerSendMessageBtn"><i class="bx bxs-message-square-dots"></i><p>Message</p></button>
+                            <?php } ?>
+                        </div>
+                        <div class="client-name-post-button">
+                            <h3 id="fullName"></h3>
                         </div>
                         <i id="email"></i>
                         <div class="client-post-transaction">

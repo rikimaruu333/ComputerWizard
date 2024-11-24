@@ -61,8 +61,30 @@ function populateClientInfo(clientData) {
     reportProfileImg.src = clientData.profile ? clientData.profile : '../images/user.jpg';
     reportProfileName.innerText = `${clientData.firstname} ${clientData.lastname}`;
     reportProfileUsertype.innerText = clientData.usertype;
+    
 }
 
+// Send Message button click
+$('#adminSendMessageBtn').on('click', function() {
+    // var userId = $(this).data('user-id');
+    
+    // Redirect to messaging page
+    window.location.href = `admin-messaging.php`;
+});
+// Send Message button click
+$('#clientSendMessageBtn').on('click', function() {
+    // var userId = $(this).data('user-id');
+    
+    // Redirect to messaging page
+    window.location.href = `client-messaging.php`;
+});
+// Send Message button click
+$('#freelancerSendMessageBtn').on('click', function() {
+    // var userId = $(this).data('user-id');
+    
+    // Redirect to messaging page
+    window.location.href = `freelancer-messaging.php`;
+});
 
 function populateCard(data) {
     var cardWithImageContainer = $('.posts-with-image');
