@@ -216,8 +216,8 @@
                                 <span class="close-btn">&times;</span>
                             </div>
                             <form id="validateIdForm">
-                                <input type="text" id="valid_id_type" name="valid_id_type" placeholder="Enter valid ID type" required>
-                                <input type="text" id="fullname" name="fullname" placeholder="Enter the ID's full name" required>
+                                <input type="text" id="valid_id_type" name="valid_id_type" placeholder="No valid ID submitted" disabled>
+                                <input type="text" id="fullname" name="fullname" placeholder="Enter the ID's full name here..." required>
                                 <button type="submit" id="freelancerRegistrationApproveBtn">Finalize Approval</button>
                             </form>
                         </div>
@@ -229,6 +229,9 @@
         </div>
 
 
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -242,6 +245,7 @@
     <script src="../js/admin-dashboard.js"></script>
     <script src="../js/admin-header.js"></script>
     <script src="../js/system-sidebar.js"></script>
+    <script src="../js/system-notifications.js"></script>
 
 </body>
 </html>

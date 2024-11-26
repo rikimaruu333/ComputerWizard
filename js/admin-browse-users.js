@@ -30,7 +30,7 @@ function populateUserList(users) {
 
         var userHTML = `
             <div class="user-details-container">
-                <div class="user-details">
+                <div class="user-details view-profile-btn" data-user-id="${user.id}" data-user-type="${user.usertype}">
                     <img src="${user.profile}" class="user-avatar" alt="User Avatar">
                     <div class="user-info">
                         <h3>${user.firstname} ${user.lastname}</h3>
@@ -76,7 +76,7 @@ function populateUserList(users) {
 
 // Adjusted selectors to match the updated admin page filtering structure
 const searchBar = document.querySelector(".search input"),
-      searchIcon = document.querySelector(".search button"),
+      searchIcon = document.getElementById("searchBar"),
       searchFilterAddress = document.getElementById('filterAddress'),
       searchFilterGender = document.getElementById('filterGender'),
       searchFilterRestriction = document.getElementById('filterRestriction'),
@@ -128,7 +128,7 @@ function renderUsers(users) {
 
             const userHTML = `
                 <div class="user-details-container">
-                    <div class="user-details">
+                    <div class="user-details view-profile-btn" data-user-id="${user.id}" data-user-type="${user.usertype}">
                         <img src="${user.profile}" class="user-avatar" alt="User Image">
                         <div class="user-info">
                             <h3>${user.firstname} ${user.lastname}</h3>

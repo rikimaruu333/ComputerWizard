@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const notificationBell = document.getElementById('notificationBell');
     const notificationCount = document.getElementById('notificationCount');
-    const notificationList = document.querySelector('.notification-list');
+    const notificationList = document.getElementById('notificationList');
     const notificationDropdown = document.getElementById('notificationDropdown');
     const userId = document.getElementById('head').getAttribute('data-user-id');
     
@@ -36,6 +36,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     socket.on('booking-approval-notification', (data) => {
         console.log('Received booking approval notification:', data);
+        processNewNotification(data);
+    });
+
+    // Listen for booking notifications
+    socket.on('ongoing-transaction-notification', (data) => {
+        console.log('Received booking notification:', data);
         processNewNotification(data);
     });
 

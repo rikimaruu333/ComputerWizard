@@ -18,7 +18,7 @@
     width: 500px;
     height: auto; 
     overflow: hidden;
-    background: #F9F9F9;
+    background: #FEFEFE;
     border-radius: 10px;
     box-shadow: 0 12px 28px rgba(0, 0, 0, .12);
 }
@@ -30,7 +30,7 @@
 .transaction-details-container-header,
 .transaction-info-container-header {
     padding: 10px 15px;
-    background-color: #F9F9F9;
+    background-color: #FEFEFE;
     color: #353535;
     font-size: 14px;
     display: flex;

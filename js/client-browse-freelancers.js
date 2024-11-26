@@ -19,13 +19,21 @@ $(document).ready(function() {
 
 function populateFreelancerList(freelancers) {
     var freelancerListContainer = $('.freelancer-list');
-    freelancerListContainer.empty();  // Clear previous data
+    freelancerListContainer.empty(); // Clear previous data
 
     freelancers.forEach(function(freelancer) {
-        // Determine which schedule image to use based on availability
-        var scheduleIcon = freelancer.is_available ? 
-            '<img src="../images/av-schedule-icon.png" alt="Available Schedule" title="Freelancer is available. View profile to view more details.">' : 
-            '<img src="../images/uv-schedule-icon.png" alt="Unavailable Schedule" title="Freelancer is currently unavailable. View profile to view more details.">';
+        let iconHtml;
+
+        if (freelancer.has_booking) {
+            // Icon for freelancers with ongoing bookings
+            iconHtml = `
+                <i class="bx bxs-user-account" title="Freelancer has an ongoing booking."></i>`;
+        } else {
+            // Icon for schedule availability
+            iconHtml = freelancer.is_available 
+                ? `<img src="../images/av-schedule-icon.png" alt="Available Schedule" title="Freelancer is available. View profile to view more details.">` 
+                : `<img src="../images/uv-schedule-icon.png" alt="Unavailable Schedule" title="Freelancer is currently unavailable. View profile to view more details.">`;
+        }
 
         var freelancerHTML = `
             <div class="freelancer-details-container">
@@ -38,7 +46,7 @@ function populateFreelancerList(freelancers) {
                 </div>
                 <div class="freelancer-details-buttons">
                     <div class="button-box" title="Hover icon to check status.">
-                        ${scheduleIcon} 
+                        ${iconHtml}
                     </div>
                     <div class="button-box send-message-btn" title="Send Message">
                         <i class="bx bx-message"></i>
@@ -49,26 +57,23 @@ function populateFreelancerList(freelancers) {
                 </div>
             </div>
         `;
-        freelancerListContainer.append(freelancerHTML);  // Append each freelancer's details
+        freelancerListContainer.append(freelancerHTML); // Append each freelancer's details
     });
-    
-    // Add click event listeners for each "View Profile" button
+
+    // Add event listeners
     $('.view-profile-btn').on('click', function() {
         var freelancerId = $(this).data('freelancer-id');
         window.location.href = `system-view-freelancer-profile.php?freelancer_id=${freelancerId}`;
     });
-    
-    // Send Message button click
+
     $('.send-message-btn').on('click', function() {
-        // var userId = $(this).data('user-id');
-        
-        // Redirect to messaging page
         window.location.href = `client-messaging.php`;
     });
 }
 
 const searchBar = document.querySelector(".search input"),
-      searchIcon = document.querySelector(".search button"),
+      searchIcon = document.getElementById("searchBar"),
+      searchFilterRecommendation = document.getElementById('filterRecommendation'),
       searchFilterAddress = document.getElementById('filterAddress'),
       searchFilterGender = document.getElementById('filterGender'),
       usersListContainer = document.querySelector(".freelancer-list-container");
@@ -89,6 +94,7 @@ searchIcon.onclick = () => {
 // Function to fetch freelancers based on search term and filters
 function filterAndSearchFreelancers() {
     let searchTerm = searchBar.value.trim();  // Get search term
+    let recommendation = searchFilterRecommendation.value;  // Get selected recommendation filter
     let address = searchFilterAddress.value;  // Get selected address filter
     let gender = searchFilterGender.value;    // Get selected gender filter
 
@@ -102,7 +108,7 @@ function filterAndSearchFreelancers() {
         }
     };
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.send(`searchTerm=${searchTerm}&address=${address}&gender=${gender}`); // Send search term and filters
+    xhr.send(`searchTerm=${searchTerm}&recommendation=${recommendation}&address=${address}&gender=${gender}`); // Send search term and filters
 }
 
 // Function to render the freelancer results
@@ -112,9 +118,19 @@ function renderFreelancers(freelancers) {
     if (freelancers.length > 0) {
         freelancers.forEach(freelancer => {
             // Determine which schedule image to use based on availability
-            var scheduleIcon = freelancer.is_available ? 
-                '<img src="../images/av-schedule-icon.png" alt="Available Schedule" title="Freelancer is available. View profile to view more details.">' : 
-                '<img src="../images/uv-schedule-icon.png" alt="Unavailable Schedule" title="Freelancer is currently unavailable. View profile to view more details.">';
+            let iconHtml;
+
+            if (freelancer.has_booking) {
+                // Icon for freelancers with ongoing bookings
+                iconHtml = `
+                    <i class="bx bxs-user-account" title="Freelancer has an ongoing booking."></i>`;
+            } else {
+                // Icon for schedule availability
+                iconHtml = freelancer.is_available 
+                    ? `<img src="../images/av-schedule-icon.png" alt="Available Schedule" title="Freelancer is available. View profile to view more details.">` 
+                    : `<img src="../images/uv-schedule-icon.png" alt="Unavailable Schedule" title="Freelancer is currently unavailable. View profile to view more details.">`;
+            }
+
 
             const freelancerHTML = `
                 <div class="freelancer-details-container">
@@ -127,7 +143,7 @@ function renderFreelancers(freelancers) {
                     </div>
                     <div class="freelancer-details-buttons">
                         <div class="button-box" title="Hover icon to check status.">
-                            ${scheduleIcon} 
+                            ${iconHtml} 
                         </div>
                         <div class="button-box send-message-btn" title="Send Message">
                             <i class="bx bx-message"></i>
@@ -161,6 +177,7 @@ function renderFreelancers(freelancers) {
 
 // Add event listeners to trigger filter and search
 searchBar.onkeyup = filterAndSearchFreelancers;
+searchFilterRecommendation.addEventListener('change', filterAndSearchFreelancers);
 searchFilterAddress.addEventListener('change', filterAndSearchFreelancers);
 searchFilterGender.addEventListener('change', filterAndSearchFreelancers);
 

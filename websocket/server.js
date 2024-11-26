@@ -270,6 +270,67 @@ app.post('/emit-booking-notification', (req, res) => {
 });
 
 
+app.post('/emit-ongoing-transaction-notification', (req, res) => {
+    const notifications = req.body.notifications;
+
+    if (!Array.isArray(notifications)) {
+        return res.status(400).json({ success: false, message: 'Invalid data format' });
+    }
+
+    db.beginTransaction(transactionErr => {
+        if (transactionErr) return res.status(500).json({ success: false, message: 'Transaction error' });
+
+        let insertCount = 0;
+
+        notifications.forEach(({ userId, action, message }) => {
+            // Validate the necessary fields
+            if (!userId || !action || !message) {
+                console.error('Missing fields in the request:', { userId, action, message });
+                return res.status(400).json({ success: false, message: 'Missing required fields' });
+            }
+
+            const query = `INSERT INTO notifications (user_id, action, message, viewed) VALUES (?, ?, ?, false)`;
+            db.query(query, [userId, action, message], (error, results) => {
+                if (error) return db.rollback(() => res.status(500).json({ success: false, message: 'Error saving notifications' }));
+
+                const notification = {
+                    notification_id: results.insertId,
+                    action,
+                    message,
+                    user_id: userId,
+                    viewed: false,
+                    created_at: new Date().toISOString(),
+                };
+
+                // Emit notification via Socket.IO to the specific user's room
+                io.to(userId).emit('ongoing-transaction-notification', notification);
+
+                insertCount++;
+
+                // Commit after processing all notifications
+                if (insertCount === notifications.length) {
+                    db.commit(commitErr => {
+                        if (commitErr) return db.rollback(() => res.status(500).json({ success: false, message: 'Transaction commit error' }));
+
+                        // Fetch all notifications for the users in the notifications array
+                        const userIds = notifications.map(n => n.userId).join(',');
+                        db.query(`SELECT * FROM notifications WHERE user_id IN (${userIds}) ORDER BY created_at DESC`, (fetchError, fetchResults) => {
+                            if (fetchError) return res.status(500).json({ success: false, message: 'Error fetching notifications' });
+
+                            const unreadCounts = notifications.reduce((acc, n) => {
+                                acc[n.userId] = fetchResults.filter(f => f.user_id === n.userId && !f.viewed).length;
+                                return acc;
+                            }, {});
+
+                            res.status(200).json({ success: true, notifications: fetchResults, unreadCounts });
+                        });
+                    });
+                }
+            });
+        });
+    });
+});
+
 // // Route to fetch notifications for a specific user
 // app.get('/get-notifications', (req, res) => {
 //     const user_id = req.query.user_id; // Pass user_id as query parameter

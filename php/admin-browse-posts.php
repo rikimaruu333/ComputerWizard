@@ -42,5 +42,6 @@
     <script src="../js/system-fetch-comment.js"></script>
     <script src="../js/system-add-comment.js"></script>
     <script src="../js/system-sidebar.js"></script>
+    <script src="../js/system-notifications.js"></script>
 </body>
 </html>

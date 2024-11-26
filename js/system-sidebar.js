@@ -15,6 +15,29 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+document.getElementById('logout-btn').addEventListener('click', function (e) {
+    e.preventDefault(); // Prevent the default action of the link
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'You will be logged out!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, log me out',
+        cancelButtonText: 'Cancel',
+        customClass: {
+            popup: 'small-swal-popup',
+            icon: 'small-swal-icon',
+            confirmButton: 'custom-confirm-button',
+            cancelButton: 'custom-cancel-button'
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Redirect to the logout script
+            window.location.href = '../php/logout.php';
+        }
+    });
+});
 
 function fetchUserData() {
     $.ajax({

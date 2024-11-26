@@ -45,11 +45,15 @@
                         </label>
                     </div>
                 </div>
-
                 <div class="booking-details-btn">
                     <button type="submit" title="Book User" id="bookingUserBtn" class="btn btn-booking">Book User</button>
                 </div>
             </div>
+                
+                <div class="booking-request-booking-details-note">
+                    <p><i class="bx bx-info-circle"></i>Note: <span>Communicate with this freelancer to discuss more about the booking details!</span></p>
+                </div>
+
         </div>
 
     </div>

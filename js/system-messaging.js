@@ -1,5 +1,5 @@
 const searchBar = document.querySelector(".search input"),
-searchIcon = document.querySelector(".search button"),
+searchIcon = document.getElementById("searchBar"),
 usersList = document.querySelector(".users-list");
 
 searchIcon.onclick = ()=>{

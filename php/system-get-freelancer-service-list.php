@@ -15,6 +15,10 @@ $clientId = $_SESSION['USER']->id;
 try {
     $conn = new Connection();
     $db = $conn->openConnection();
+    // Set timezone to Asia/Manila
+    date_default_timezone_set('Asia/Manila');
+    $currentDay = date('l'); // Current day
+    $currentTime = date('H:i'); // Current time
 
     // Check if the freelancer has an approved ongoing booking
     $ongoingBookingStmt = $db->prepare("SELECT COUNT(*) AS booking_count FROM booking WHERE freelancer_id = :freelancer_id AND booking_status = 'Approved'");
@@ -22,9 +26,25 @@ try {
     $ongoingBooking = $ongoingBookingStmt->fetch(PDO::FETCH_ASSOC);
     $hasOngoingBooking = $ongoingBooking['booking_count'] > 0;
 
-    // Fetch all services for the given freelancer
-    $stmt = $db->prepare("SELECT * FROM servicelisting WHERE freelancer_id = :freelancer_id");
-    $stmt->execute(['freelancer_id' => $freelancerId]);
+    // Fetch all services for the given freelancer along with their availability
+    $stmt = $db->prepare("
+        SELECT s.*, 
+               CASE WHEN EXISTS (
+                    SELECT 1 
+                    FROM schedules sch 
+                    WHERE sch.freelancer_id = s.freelancer_id 
+                    AND sch.day = :currentDay 
+                    AND sch.time_in <= :currentTime 
+                    AND sch.time_out >= :currentTime
+                ) THEN 1 ELSE 0 END AS is_available
+        FROM servicelisting s
+        WHERE s.freelancer_id = :freelancer_id
+    ");
+    $stmt->execute([
+        'freelancer_id' => $freelancerId,
+        'currentDay' => $currentDay,
+        'currentTime' => $currentTime
+    ]);
     $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     $result = [];

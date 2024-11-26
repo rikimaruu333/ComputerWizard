@@ -24,7 +24,7 @@
     width: 500px;
     height: auto; /* Allows dynamic height depending on the content */
     overflow: hidden;
-    background: #F9F9F9;
+    background: #FEFEFE;
     border-radius: 10px;
     box-shadow: 0 12px 28px rgba(0, 0, 0, .12);
 }
@@ -32,7 +32,7 @@
 .restrict-container-header,
 .unrestrict-container-header {
     padding: 10px 15px;
-    background-color: #F9F9F9;
+    background-color: #FEFEFE;
     color: #353535;
     font-size: 14px;
     display: flex;
@@ -137,7 +137,7 @@
     color: #202020;
     border: 1px solid #DDDDDD;
     border-radius: 5px;
-    background-color: #F9F9F9;
+    background-color: #FEFEFE;
     outline: none;
     box-shadow: none;
     transition: border-color 0.3s ease-in-out;
@@ -214,7 +214,7 @@ textarea::placeholder {
 }
 
 .report-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #FEFEFE;
 }
 
 .report-table tbody td[colspan="2"] {

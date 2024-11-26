@@ -35,6 +35,7 @@
         <div class="card">
             <div class="card-config">
                 <i class="bx bxs-user-circle" id= "postTagDetailsBtn" title="Show post tagged freelancer"></i>
+                <i class="bx bxs-trash" id= "deletePostBtn" title="Delete this post"></i>
             </div>
             <div class="top">
                 <div class="userDetails" id="viewClientProfile" title="View Profile">
@@ -58,8 +59,8 @@
 
             <div class="btns">
                 <div class="left">
-                    <div class="post-view-comments">
-                    <i class="bx bx-comment-dots" data-post-id="" id="viewCommentsBtn" title="View comments"></i>
+                    <div class="post-view-comments" id="viewCommentsBtn" >
+                    <i class="bx bx-comment-dots" data-post-id="" title="View comments"></i>
                         <h4 class="comments">12 comments</h4>
                     </div>
                 </div>

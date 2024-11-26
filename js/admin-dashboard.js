@@ -1,4 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
+
+    
+    // Initialize EmailJS with the first public key
+    window.addEventListener('load', () => {
+        emailjs.init("XnzWkndgRn2h6N10o"); // First public key
+    });
+
+
     // Elements for ongoing and ended transactions toggles
     const toggleOngoing = document.querySelector('.toggle-ongoing');
     const toggleEnded = document.querySelector('.toggle-ended');
@@ -162,6 +170,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const freelancerId = $("#freelancerRegistrationApproveBtn").data("freelancer-id");
         const validIdType = $("#valid_id_type").val();
         const fullName = $("#fullname").val();
+        const freelancerEmail = $("#registrationModalEmail").text(); // Assuming the email is already fetched and displayed in the modal
 
         Swal.fire({
             title: "Are you sure?",
@@ -191,7 +200,12 @@ document.addEventListener("DOMContentLoaded", function () {
                         const res = JSON.parse(response);
                         if (res.success) {
                             Swal.fire("Approved!", "The freelancer has been approved.", "success");
-                            validateIdModal.style.display = "none"; // Close modal
+
+                            // Close the modal
+                            validateIdModal.style.display = "none";
+
+                            // Send approval email notification
+                            sendApprovalNotification(freelancerEmail, fullName);
                         } else {
                             Swal.fire("Error!", res.error || "An unknown error occurred.", "error");
                         }
@@ -204,11 +218,43 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    // Function to send approval notification email
+    function sendApprovalNotification(email, fullName) {
+        if (!email || email.trim() === "") {
+            console.error('Error: Recipient email is empty.');
+            return; // Exit if email is empty
+        }
+
+        const message = `
+            Congratulations ${fullName},
+
+            We are excited to inform you that your account has been approved on GigHub. You are now officially part of our freelancer community.
+
+            Start exploring opportunities and connecting with clients today. We look forward to seeing your success on the platform!
+        `;
+
+        const templateParams = {
+            from_name: "GigHub Team",
+            reply_to: email,
+            message: message
+        };
+
+        console.log("Sending email with parameters:", templateParams); // Debugging logs
+
+        emailjs.send('service_7edsjxk', 'template_zm3dmjk', templateParams) // Your EmailJS service and template IDs
+            .then(function (response) {
+                toastr.info('Approval email notification sent to: ' + email);
+            }, function (error) {
+                console.error('Error sending approval email:', error);
+            });
+    }
+
+
 
     $(document).on('click', '#freelancerRegistrationRejectBtn', function () {
         // Get freelancer ID (ensure this is passed when the modal opens)
         const freelancerId = $(this).data('freelancer-id');
-
+    
         Swal.fire({
             title: 'Are you sure?',
             text: "You are rejecting this freelancer.",
@@ -216,9 +262,9 @@ document.addEventListener("DOMContentLoaded", function () {
             showCancelButton: true,
             confirmButtonText: 'Yes, reject!',
             customClass: {
-                popup: 'small-swal-popup',  
+                popup: 'small-swal-popup',
                 icon: 'small-swal-icon',
-                confirmButton: 'custom-confirm-button', 
+                confirmButton: 'custom-confirm-button',
                 cancelButton: 'custom-cancel-button'
             }
         }).then((result) => {
@@ -232,9 +278,17 @@ document.addEventListener("DOMContentLoaded", function () {
                         status: 2, // Status for rejected
                     },
                     success: function (response) {
-                        Swal.fire('Rejected!', 'The freelancer has been rejected.', 'success');
-                        $('#freelancerRegistrationModal').hide(); // Close modal
-                        // Optionally, refresh the list or remove the rejected freelancer
+                        const res = JSON.parse(response);
+    
+                        if (res.success) {
+                            const freelancerEmail = res.email; // Email address from response
+                            sendRejectionNotification(freelancerEmail); // Notify the user via email
+    
+                            Swal.fire('Rejected!', 'The freelancer has been rejected.', 'success');
+                            $('#freelancerRegistrationModal').hide(); // Close modal
+                        } else {
+                            Swal.fire('Error!', res.error || 'An unknown error occurred.', 'error');
+                        }
                     },
                     error: function (xhr, status, error) {
                         Swal.fire('Error!', 'Failed to reject the freelancer.', 'error');
@@ -243,6 +297,41 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+    
+    // Function to send rejection email notification
+    function sendRejectionNotification(freelancerEmail) {
+        if (!freelancerEmail || freelancerEmail.trim() === "") {
+            console.error('Error: Recipient email is empty.');
+            return; // Exit the function if the email is empty
+        }
+    
+        // Construct the rejection message
+        const message = `
+            We regret to inform you that your freelancer registration request has been rejected due to certain inconsistencies or missing information in your submission. 
+            Please ensure that you provide accurate and complete details when applying. You are welcome to reapply at any time with valid credentials and all required documents.
+    
+            Tips for reapplying:
+            - Ensure your profile information is accurate.
+            - Submit clear and valid identification.
+            - Provide a detailed and professional registration request.
+    
+            If you have any questions or need further assistance, feel free to contact our support team. We are here to help you.
+        `;
+    
+        const templateParams = {
+            from_name: "GigHub Team",
+            reply_to: freelancerEmail,
+            message: message
+        };
+    
+        emailjs.send('service_7edsjxk', 'template_zm3dmjk', templateParams)
+            .then(function (response) {
+                toastr.info('Rejection notification sent successfully.');
+            }, function (error) {
+                console.error('Error sending rejection email:', error);
+            });
+    }
+    
 
 
 

@@ -34,5 +34,6 @@
     <script src="../js/admin-header.js"></script>
     <script src="../js/system-messaging.js"></script>
     <script src="../js/system-sidebar.js"></script>
+    <script src="../js/system-notifications.js"></script>
 </body>
 </html>

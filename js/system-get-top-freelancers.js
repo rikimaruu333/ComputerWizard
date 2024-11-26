@@ -5,7 +5,8 @@ $(document).ready(function () {
         dataType: 'json',
         success: function (response) {
             if (response && response.freelancers) {
-                populateFreelancerRecommendations(response.freelancers);
+                const userID = response.userID;
+                populateFreelancerRecommendations(response.freelancers, userID);
             } else {
                 console.error('Error fetching freelancers:', response.error);
             }
@@ -16,7 +17,7 @@ $(document).ready(function () {
     });
 });
 
-function populateFreelancerRecommendations(freelancers) {
+function populateFreelancerRecommendations(freelancers, userID) {
     const recommendationList = $('.freelancer-recommendation-list');
     recommendationList.empty(); // Clear any existing content
 
@@ -46,7 +47,13 @@ function populateFreelancerRecommendations(freelancers) {
         // Add click event for redirecting to profile page
         freelancerContainer.find('.freelancer-info').on('click', function () {
             const freelancerId = $(this).data('id');
-            window.location.href = `system-view-freelancer-profile.php?freelancer_id=${freelancerId}`;
+            if (freelancerId === userID) {
+                // Redirect to freelancer-dashboard.php if the IDs match
+                window.location.href = 'freelancer-dashboard.php';
+            } else {
+                // Redirect to the freelancer's profile page
+                window.location.href = `system-view-freelancer-profile.php?freelancer_id=${freelancerId}`;
+            }
         });
         
         recommendationList.append(freelancerContainer);

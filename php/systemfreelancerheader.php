@@ -21,13 +21,13 @@ $userId = $_SESSION['USER']->id;
                         <div class="notification-header">
                             <h4>Notifications</h4>
                         </div>
-                        <div class="notification-list">
+                        <div class="notification-list" id="notificationList">
                             
                         </div>
                     </div>
                 </div>
                 <i class="bx bxs-cog" id="openUserSettings"></i>
-                <a href="../php/logout.php"><i class="bx bxs-log-out"></i></a>
+                <a href="" id="logout-btn"><i class="bx bxs-log-out"></i></a>
             </div>
         </div>
 

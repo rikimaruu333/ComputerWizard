@@ -21,14 +21,14 @@
     width: 500px;
     height: auto; /* Allows dynamic height depending on the content */
     overflow: hidden;
-    background: #F9F9F9;
+    background: #FEFEFE;
     border-radius: 10px;
     box-shadow: 0 12px 28px rgba(0, 0, 0, .12);
 }
 
 .booking-container-header {
     padding: 10px 15px;
-    background-color: #F9F9F9;
+    background-color: #FEFEFE;
     color: #353535;
     font-size: 14px;
     display: flex;
@@ -162,4 +162,28 @@
     background-color: #edf4ff;
     outline: 1px solid #DDDDDD;
     color: #1f65fb;
+}
+
+
+
+
+
+.booking-request-booking-details-note,
+.transaction-info-transaction-details-note {
+    padding: 20px;
+    margin-top: 2px;
+    font-size: 12px;
+    font-style: italic;
+    color: #1f65fb;
+    border-top: 1px solid #1f65fb;
+    border-bottom: 1px solid #1f65fb;
+    background-color: #edf4ff;
+}
+.booking-request-booking-details-note p,
+.transaction-info-transaction-details-note p {
+    font-weight: 600;
+}
+.booking-request-booking-details-note p span,
+.transaction-info-transaction-details-note p span {
+    font-weight: 400;
 }

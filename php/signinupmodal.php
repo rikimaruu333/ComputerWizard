@@ -18,17 +18,10 @@
                     <div class="error-box" style="display: none;"></div> 
                 </div>
                 <form id="loginForm" method="POST">
-                    <h1>Sign In</h1>
-                    <div class="social-icons">
-                        <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-                        <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
-                        <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </div>
-                    <span>or use your email password</span>
+                    <h1>Sign In</h1><br>
                     <input type="email" placeholder="Email" name="email" id="loginemail" required>
                     <input type="password" placeholder="Password" name="password" id="loginpassword"required>
-                    <a href="#">Forgot Your Password?</a>
+                    <br>
                     <button type="submit">Sign In</button>
                 </form>
             </div>

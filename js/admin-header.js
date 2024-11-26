@@ -19,9 +19,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Elements for notification system
     const notificationBell = document.getElementById('openReportsListModalBtn');
-    const notificationDropdown = document.getElementById('notificationDropdown');
-    const notificationList = notificationDropdown.querySelector('.notification-list');
-    const notificationCount = document.getElementById('notificationCount');
+    const notificationDropdown = document.getElementById('reportNotificationDropdown');
+    const notificationList = document.getElementById('reportNotificationList');
+    const notificationCount = document.getElementById('reportNotificationCount');
 
     // Modal elements
     const reportDetailsModal = document.getElementById('reportDetailsModal');

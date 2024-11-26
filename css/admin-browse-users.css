@@ -1,5 +1,5 @@
 body{
-    background-color: #F9F9F9;
+    background-color: #FEFEFE;
     overflow: hidden;
 }
 
@@ -13,7 +13,7 @@ body{
     height: 87vh;
     margin: 10px;
     margin-left: 90px;
-    background-color: #F9F9F9;
+    background-color: #FEFEFE;
     border: 1px solid #DDDDDD;
     overflow-x: auto;
 }
@@ -117,8 +117,12 @@ body{
   border-bottom: 1px solid #DDDDDD;
 }
 .user-details{
+  cursor: pointer;
   display: flex;
   align-items: center;
+}
+.user-details:hover h3{
+  text-decoration: underline;
 }
 .user-details img{
   width: 45px;
@@ -192,7 +196,7 @@ body{
     right: 0;
     width: calc(29% - 100px);
     height: 90vh;
-    background-color: #F9F9F9;
+    background-color: #FEFEFE;
     border: 1px solid #DDDDDD;
     display: flex;
     flex-direction: column;

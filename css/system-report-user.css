@@ -17,14 +17,14 @@
     width: 500px;
     height: auto; /* Allows dynamic height depending on the content */
     overflow: hidden;
-    background: #F9F9F9;
+    background: #FEFEFE;
     border-radius: 10px;
     box-shadow: 0 12px 28px rgba(0, 0, 0, .12);
 }
 
 .report-profile-container-header {
     padding: 10px 15px;
-    background-color: #F9F9F9;
+    background-color: #FEFEFE;
     color: #353535;
     font-size: 14px;
     display: flex;
@@ -126,7 +126,7 @@
     font-size: 12px;
     margin-top: 10px;
     min-height: 80px;
-    background-color: #F9F9F9;
+    background-color: #FEFEFE;
     border: 1px solid #acacacc1;
     padding: 8px;
     border-radius: 5px;
@@ -159,7 +159,7 @@
     transition: background-color 0.3s ease;
 }
 .submit-report-button.active {
-    color: #F9F9F9;
+    color: #FEFEFE;
     cursor: pointer;
     background-color: #1f65fb;
     border: 1px solid #555;

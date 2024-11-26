@@ -7,7 +7,7 @@
             </div>
             
             <div class="messaging-chats-body">
-                <div class="search">
+                <div class="search" id="searchBar">
                     <span class="text">Select a user to start chat</span>
                     <input type="text" placeholder="Enter name to search...">
                     <button><i class="fas fa-search"></i></button>

@@ -18,7 +18,7 @@ html {
     align-items: center;
     flex-direction: column;
     height: 592vh;
-    background-color: #F9F9F9;
+    background-color: #FEFEFE;
 }
 
 .pagecontainer{
@@ -29,7 +29,7 @@ html {
 }
 .bgvideocontainer{
     position: absolute;
-    background: linear-gradient(0deg, #F9F9F9, black 2%);
+    background: linear-gradient(0deg, #FEFEFE, black 2%);
     margin-bottom: 10px;
 }
 .bgvideo{

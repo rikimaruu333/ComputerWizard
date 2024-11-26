@@ -30,7 +30,7 @@
 
 <div class="admin-browse-users">
         <div class="search-bar-container">
-            <div class="search">
+            <div class="search" id="searchBar">
                 <span class="text">Search a user here...</span>
                 <input type="text" placeholder="Enter name to search...">
                 <button><i class="fas fa-search"></i></button>
@@ -162,5 +162,6 @@
     <script src="../js/admin-browse-users.js"></script>
     <script src="../js/system-sidebar.js"></script>
     <script src="../js/system-restrict-user.js"></script>
+    <script src="../js/system-notifications.js"></script>
 </body>
 </html>

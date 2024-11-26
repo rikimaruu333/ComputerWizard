@@ -6,7 +6,8 @@ try {
     $connection = new Connection();
     $con = $connection->openConnection();
 
-    // Fetch top 5 recommended freelancers based on review recommendations and average rating
+    $userID = $_SESSION['USER']->id;
+
     $stmt = $con->prepare("
         SELECT u.id, u.firstname, u.lastname, u.usertype, u.profile,
                AVG(r.rating) AS rating,
@@ -22,7 +23,7 @@ try {
 
     $freelancers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    echo json_encode(['freelancers' => $freelancers]);
+    echo json_encode(['freelancers' => $freelancers, 'userID' => $userID]);
 } catch (Exception $e) {
     echo json_encode(['error' => 'Error fetching data: ' . $e->getMessage()]);
 }

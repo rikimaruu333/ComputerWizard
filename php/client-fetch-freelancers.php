@@ -22,11 +22,16 @@ $query = "
                 AND s.day = :currentDay 
                 AND s.time_in <= :currentTime 
                 AND s.time_out >= :currentTime
-            ) THEN 1 ELSE 0 END AS is_available
+            ) THEN 1 ELSE 0 END AS is_available,
+           CASE WHEN EXISTS (
+                SELECT 1 
+                FROM booking b 
+                WHERE b.freelancer_id = u.id 
+                AND b.booking_status = 'Approved'
+            ) THEN 1 ELSE 0 END AS has_booking
     FROM users u
     WHERE u.usertype = 'Freelancer' 
-    AND u.status = 1 
-    ORDER BY u.firstname ASC";
+    AND u.status = 1";
 
 $stmt = $con->prepare($query);
 $stmt->bindParam(':currentDay', $currentDay, PDO::PARAM_STR);

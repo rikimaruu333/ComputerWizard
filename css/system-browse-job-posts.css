@@ -1,5 +1,5 @@
 body{
-    background-color: #F9F9F9;
+    background-color: #FEFEFE;
     overflow: hidden;
 }
 
@@ -12,7 +12,7 @@ body{
     height: 87vh;
     margin: 10px;
     margin-left: 90px;
-    background-color: #F9F9F9;
+    background-color: #FEFEFE;
     border: 1px solid #DDDDDD;
     overflow: hidden;
 }
@@ -81,11 +81,13 @@ body{
     top: 10px;
     right: 10px;
 }
-.card .card-config i.bxs-user-circle{
+.card .card-config i.bxs-user-circle,
+.card .card-config i.bxs-trash{
     font-size: 20px;
     color: #fb1f1f;
 }
-.card .card-config i.bxs-user-circle:hover{
+.card .card-config i.bxs-user-circle:hover,
+.card .card-config i.bxs-trash:hover{
     color: #202020;
 }
 .card .top{
@@ -282,10 +284,15 @@ body{
 
 .btns .left .post-view-comments
 {
+    cursor: pointer;
     display: flex;
     align-items: center;
     font-size: 20px;
     color: #353535;
+}
+.btns .left .post-view-comments:hover h4
+{
+    text-decoration: underline;
 }
 
 .btns .left .post-view-comments i
@@ -455,7 +462,7 @@ body{
     right: 0;
     width: calc(29% - 100px);
     height: 90vh;
-    background-color: #F9F9F9;
+    background-color: #FEFEFE;
     border: 1px solid #DDDDDD;
     display: flex;
     flex-direction: column;

@@ -13,7 +13,7 @@
     position: absolute;
     top: 12%;
     right: 19%;
-    background-color: #F9F9F9;
+    background-color: #FEFEFE;
     width: 24%;
     min-height: 440px;
     max-height: 440px;
@@ -23,7 +23,7 @@
 .update-uploading-area-header {
     padding: 18px 15px;
     margin-bottom: 10px;
-    background-color: #F9F9F9;
+    background-color: #FEFEFE;
     color: #353535;
     font-size: 14px;
     display: flex;
@@ -95,14 +95,14 @@
     width: 500px;
     height: 440px;
     overflow: hidden;
-    background: #F9F9F9;
+    background: #FEFEFE;
     border-radius: 10px;
     box-shadow: 0 12px 28px rgba(0, 0, 0, .12);
     
 }
 .update-post-container-header {
     padding: 10px 15px;
-    background-color: #F9F9F9;
+    background-color: #FEFEFE;
     color: #353535;
     font-size: 14px;
     display: flex;
@@ -158,7 +158,7 @@
 .update-post-form button {
     width: 100%;
     height: 50px;
-    color: #F9F9F9;
+    color: #FEFEFE;
     background-color: #1f65fb;
     border: 1px solid #555;
     border-radius: 5px;
@@ -183,7 +183,7 @@
     font-size: 14px;
     margin-top: 30px;
     min-height: 100px;
-    background-color: #F9F9F9;
+    background-color: #FEFEFE;
 }
 .update-post-form textarea::placeholder{
     color: #858585;
@@ -192,7 +192,7 @@
     color: #b3b3b3;
 }
 .update-post-form textarea:valid ~ button{
-    color: #F9F9F9;
+    color: #FEFEFE;
     cursor: pointer;
     background: #1f65fb;
 }

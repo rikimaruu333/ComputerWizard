@@ -155,7 +155,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     outline: none;
-    background-color: #f9f9f9;
+    background-color: #FEFEFE;
     transition: border-color 0.3s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     resize: none; /* Prevent resizing */
@@ -187,7 +187,7 @@
 
 
 .save-comment-button {
-    color: #F9F9F9;
+    color: #FEFEFE;
     cursor: pointer;
     background-color: #1f65fb;
     border: 1px solid #555;
@@ -200,7 +200,7 @@
 }
 
 .cancel-edit-button {
-    color: #F9F9F9;
+    color: #FEFEFE;
     cursor: pointer;
     background-color: #1f65fb;
     border: 1px solid #555;

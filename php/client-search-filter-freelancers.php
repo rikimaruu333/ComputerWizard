@@ -8,18 +8,20 @@ $con = $connection->openConnection();
 
 // Retrieve search and filter values
 $searchTerm = isset($_POST['searchTerm']) ? trim($_POST['searchTerm']) : '';
+$recommendation = isset($_POST['recommendation']) ? trim($_POST['recommendation']) : '';
 $address = isset($_POST['address']) ? trim($_POST['address']) : '';
 $gender = isset($_POST['gender']) ? trim($_POST['gender']) : '';
 
 // Set the timezone to Asia/Manila
 date_default_timezone_set('Asia/Manila');
-// Get the current day and time
 $currentDay = date('l'); // e.g., 'Monday'
-$currentTime = date('H:i'); // e.g., '14:30' (24-hour format)
+$currentTime = date('H:i'); // e.g., '14:30'
 
-// Prepare the base query with filtering conditions
+// Base query
 $query = "
-    SELECT u.id, u.firstname, u.lastname, u.usertype, u.profile, 
+    SELECT u.id, u.firstname, u.lastname, u.usertype, u.profile,
+           AVG(r.rating) AS rating,
+           COUNT(CASE WHEN r.recommendation = 'Recommended' THEN 1 END) AS recommendation_count,
            CASE WHEN EXISTS (
                 SELECT 1 
                 FROM schedules s 
@@ -27,31 +29,47 @@ $query = "
                 AND s.day = :currentDay 
                 AND s.time_in <= :currentTime 
                 AND s.time_out >= :currentTime
-            ) THEN 1 ELSE 0 END AS is_available
+            ) THEN 1 ELSE 0 END AS is_available,
+           CASE WHEN EXISTS (
+                SELECT 1 
+                FROM booking b 
+                WHERE b.freelancer_id = u.id 
+                AND b.booking_status = 'Approved'
+            ) THEN 1 ELSE 0 END AS has_booking
     FROM users u
-    WHERE u.usertype = 'Freelancer' 
-    AND u.status = 1";
+    LEFT JOIN reviews r ON u.id = r.freelancer_id
+    WHERE u.usertype = 'Freelancer' AND u.status = 1";
 
-// Add conditions for filters if they are selected
+// Add filters
 if (!empty($address)) {
-    $query .= " AND address = :address";
+    $query .= " AND u.address = :address";
 }
 if (!empty($gender)) {
-    $query .= " AND gender = :gender";
+    $query .= " AND u.gender = :gender";
 }
-
-// Add search condition if a search term is provided
 if (!empty($searchTerm)) {
-    $query .= " AND (firstname LIKE :searchTerm OR lastname LIKE :searchTerm)";
+    $query .= " AND (u.firstname LIKE :searchTerm OR u.lastname LIKE :searchTerm)";
 }
 
-$query .= " ORDER BY u.firstname ASC"; // Order alphabetically
+// Grouping and sorting
+$query .= " GROUP BY u.id";
 
+// Apply sorting based on recommendation filter
+if ($recommendation === 'Highest') {
+    $query .= " ORDER BY recommendation_count DESC, u.firstname ASC";
+} elseif ($recommendation === 'Lowest') {
+    $query .= " ORDER BY recommendation_count ASC, u.firstname ASC";
+} else {
+    $query .= " ORDER BY u.firstname ASC"; // Default sorting
+}
+
+// Prepare and execute query
 $stmt = $con->prepare($query);
 
-// Bind parameters based on the selected filters and search term
+// Bind parameters
 $stmt->bindParam(':currentDay', $currentDay, PDO::PARAM_STR);
 $stmt->bindParam(':currentTime', $currentTime, PDO::PARAM_STR);
+
 if (!empty($address)) {
     $stmt->bindParam(':address', $address, PDO::PARAM_STR);
 }

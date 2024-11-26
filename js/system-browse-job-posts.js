@@ -118,9 +118,9 @@ function populateCard(posts) {
 
         // Show or hide the card-config based on tagged freelancer
         if (post.hasTaggedFreelancer) {
-            card.find('.card-config').show(); // Show if there are tagged freelancers
+            card.find('.bxs-user-circle').show(); // Show if there are tagged freelancers
         } else {
-            card.find('.card-config').hide(); // Hide otherwise
+            card.find('.bxs-user-circle').hide(); // Hide otherwise
         }
 
         card.find('#viewCommentsBtn').attr('data-post-id', post.post_id);
@@ -253,7 +253,7 @@ $(document).ready(function () {
 
 $(document).ready(function() {
     // Attach click event listener to the delete button
-    $(document).on('click', '.bxs-trash', function () {
+    $(document).on('click', '#deletePostBtn', function () {
         // Get the post ID from the clicked post's form or hidden input field
         var postCard = $(this).closest('.card'); // Get the parent card container
         var postID = postCard.find('#post_id').val(); // Assuming post ID is stored in a hidden field

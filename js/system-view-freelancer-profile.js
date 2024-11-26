@@ -246,8 +246,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
         
         function appendServiceToTable(service) {
-            const { hasOngoingBooking, alreadyBookedByClient } = service;
-    
+            const { hasOngoingBooking, alreadyBookedByClient, is_available } = service;
+
+            let bookingStatus = 'Book Service';
+            let statusClass = '';
+            if (!is_available) {
+                bookingStatus = 'Unavailable';
+                statusClass = 'unavailable';
+            } else if (hasOngoingBooking) {
+                bookingStatus = 'Ongoing Booking';
+                statusClass = 'unavailable';
+            } else if (alreadyBookedByClient) {
+                bookingStatus = 'Already Booked';
+                statusClass = 'unavailable';
+            }
+
             let serviceRow = `
                 <tr id="service-${service.service_id}" data-id="${service.service_id}">
                     <td>${service.service}</td>
@@ -255,11 +268,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     ${isClient ? `
                         <td class="service-config">
                             <i class="bx bxs-bookmark-alt-plus"></i>
-                            <u class="service-book-config ${hasOngoingBooking || alreadyBookedByClient ? 'unavailable' : ''}" 
-                               data-id="${service.service_id}" 
-                               data-name="${service.service}" 
-                               data-rate="${service.service_rate}">
-                               ${alreadyBookedByClient ? 'Already Booked' : (hasOngoingBooking ? 'Unavailable' : 'Book Service')}
+                            <u class="service-book-config ${statusClass}" 
+                            data-id="${service.service_id}" 
+                            data-name="${service.service}" 
+                            data-rate="${service.service_rate}">
+                            ${bookingStatus}
                             </u>
                         </td>` : ''}
                 </tr>
@@ -268,7 +281,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
             const bookButton = $(`#service-${service.service_id} .service-book-config`);
     
-            if (hasOngoingBooking || alreadyBookedByClient) {
+            if (statusClass === 'unavailable') {
                 bookButton.off('click');
             } else {
                 bookButton.on('click', function() {

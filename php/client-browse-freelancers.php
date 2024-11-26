@@ -31,7 +31,7 @@
 
     <div class="client-browse-freelancers">
         <div class="search-bar-container">
-            <div class="search">
+            <div class="search" id="searchBar">
                 <span class="text">Search a freelancer here...</span>
                 <input type="text" placeholder="Enter name to search...">
                 <button><i class="fas fa-search"></i></button>

@@ -1,5 +1,5 @@
 body{
-    background-color: #F9F9F9;
+    background-color: #FEFEFE;
     overflow: hidden;
 }
 html{
@@ -15,7 +15,7 @@ html{
     margin: 10px;
     padding: 10px;
     margin-left: 90px;
-    background-color: #F9F9F9;
+    background-color: #FEFEFE;
     border: 1px solid #DDDDDD;
 }
 .calendar {
@@ -77,14 +77,14 @@ html{
     width: 350px;
     max-height: 300px;
     overflow: hidden;
-    background: #F9F9F9;
+    background: #FEFEFE;
     border-radius: 10px;
     box-shadow: 0 12px 28px rgba(0, 0, 0, .12);
 }
 
 .event-detail-modal-header {
     padding: 10px 15px;
-    background-color: #F9F9F9;
+    background-color: #FEFEFE;
     color: #353535;
     font-size: 14px;
     display: flex;
@@ -137,14 +137,14 @@ html{
     width: 500px;
     height: 450px;
     overflow: hidden;
-    background: #F9F9F9;
+    background: #FEFEFE;
     border-radius: 10px;
     box-shadow: 0 12px 28px rgba(0, 0, 0, .12);
 }
 
 .add-calendar-modal-header {
     padding: 10px 15px;
-    background-color: #F9F9F9;
+    background-color: #FEFEFE;
     color: #353535;
     font-size: 14px;
     display: flex;
@@ -205,7 +205,7 @@ html{
 .add-calendar-modal button {
     width: 100%;
     height: 50px;
-    color: #F9F9F9;
+    color: #FEFEFE;
     background-color: #1f65fb;
     border: 1px solid #555;
     border-radius: 5px;
@@ -225,7 +225,7 @@ html{
 .event-detail-modal button {
     width: 100%;
     height: 50px;
-    color: #F9F9F9;
+    color: #FEFEFE;
     background-color: #fb1f1f;
     border: 1px solid #555;
     border-radius: 5px;
@@ -265,7 +265,7 @@ html{
     padding-top: 40px;
     width: calc(29% - 100px);
     height: 90vh;
-    background-color: #F9F9F9;
+    background-color: #FEFEFE;
     border: 1px solid #DDDDDD;
 }
 
@@ -276,7 +276,7 @@ html{
     right: 0;
     width: calc(30% - 100px);
     height: 90vh;
-    background-color: #F9F9F9;
+    background-color: #FEFEFE;
     border: 1px solid #DDDDDD;
   }
 

@@ -135,8 +135,8 @@
 
                         <div class="btns">
                             <div class="left">
-                                <div class="post-view-comments">
-                                    <i class="bx bx-comment-dots" data-post-id="" id="viewCommentsBtn" title="View comments"></i>
+                                <div class="post-view-comments" id="viewCommentsBtn">
+                                    <i class="bx bx-comment-dots" data-post-id="" title="View comments"></i>
                                     <h4 class="comments">12 comments</h4>
                                 </div>
                             </div>
@@ -203,58 +203,6 @@
                         <button>Send Message</button>
                     </div>
                 </div>
-                <div class="recommended-freelancer-container">
-                    <div class="freelancer-info">
-                        <div class="freelancer-info-img">
-                            <img src="../images/userpic1.jpg" alt="" id="profile">
-                        </div>
-                        <div class="freelancer-details">
-                            <h3>Don Quixote</h3>
-                            <p>Freelancer</p>
-                        </div>
-                    </div>
-                    <div class="freelancer-rating">
-                        <p>5.0</p>
-                        <div class="stars">
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                        </div>
-                        <span>19 recommendations</span>
-                    </div>
-                    <div class="recommended-freelancer-buttons">
-                        <button>View Profile</button>
-                        <button>Send Message</button>
-                    </div>
-                </div>
-                <div class="recommended-freelancer-container">
-                    <div class="freelancer-info">
-                        <div class="freelancer-info-img">
-                            <img src="../images/userpic1.jpg" alt="" id="profile">
-                        </div>
-                        <div class="freelancer-details">
-                            <h3>Don Quixote</h3>
-                            <p>Freelancer</p>
-                        </div>
-                    </div>
-                    <div class="freelancer-rating">
-                        <p>5.0</p>
-                        <div class="stars">
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                            <i class="bx bxs-star"></i>
-                        </div>
-                        <span>19 recommendations</span>
-                    </div>
-                    <div class="recommended-freelancer-buttons">
-                        <button>View Profile</button>
-                        <button>Send Message</button>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -271,6 +219,7 @@
     <script src="../js/system-fetch-comment.js"></script>
     <script src="../js/system-add-comment.js"></script>
     <script src="../js/system-sidebar.js"></script>
+    <script src="../js/system-get-top-freelancers.js"></script>
     <?php
         if($_SESSION['USER']->usertype == "Admin"){
         ?>
