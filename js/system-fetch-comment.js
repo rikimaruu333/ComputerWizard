@@ -19,7 +19,7 @@ $(document).ready(function() {
             success: function(response) {
                 let data = JSON.parse(response);
                 if (data.status === 'success') {
-                    displayComments(data.comments);
+                    displayComments(data.comments, data.user_usertype);
                     $('#commentModal').show();
                 } else {
                     alert('Failed to load comments.');
@@ -31,7 +31,7 @@ $(document).ready(function() {
         });
     }
 
-    function displayComments(comments) {
+    function displayComments(comments, user_usertype) {
         let commentsContainer = $('#commentsContainer');
         commentsContainer.empty(); // Clear previous comments
     
@@ -45,12 +45,33 @@ $(document).ready(function() {
         } else {
             // Loop through comments and display them
             comments.forEach(comment => {
-                let ownerButtons = comment.is_owner ? `
-                    <div class="comment-actions">
-                        <i class="bx bxs-edit" data-comment-id="${comment.comment_id}"></i>
-                        <i class="bx bxs-trash delete-comment-button" data-comment-id="${comment.comment_id}"></i>
-                    </div>
-                ` : '';
+                // Check if user is Admin or if the comment is owned by the current user
+                let ownerButtons = '';
+                if (comment.is_owner) {
+                    ownerButtons = `
+                        <div class="comment-actions">
+                            <i class="bx bxs-edit" data-comment-id="${comment.comment_id}"></i>
+                            <i class="bx bxs-trash delete-comment-button" data-comment-id="${comment.comment_id}"></i>
+                        </div>
+                    `;
+                }
+                if (user_usertype === 'Admin') {
+                    ownerButtons = `
+                        <div class="comment-actions">
+                            ${user_usertype === 'Admin' ? 
+                                '<i class="bx bxs-trash delete-comment-button" data-comment-id="${comment.comment_id}"></i>' 
+                                : ''}
+                        </div>
+                    `;
+                }
+                if (comment.is_owner && user_usertype === 'Admin') {
+                    ownerButtons = `
+                        <div class="comment-actions">
+                            <i class="bx bxs-edit" data-comment-id="${comment.comment_id}"></i>
+                            <i class="bx bxs-trash delete-comment-button" data-comment-id="${comment.comment_id}"></i>
+                        </div>
+                    `;
+                }
     
                 commentsContainer.append(`
                     <div class="comment-container">

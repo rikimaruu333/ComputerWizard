@@ -1,4 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // JavaScript to display the message when a file is chosen
+    document.getElementById("proofImage").addEventListener("change", function() {
+        const fileInput = this;
+        const messageElement = document.getElementById("proofImageMessage");
+
+        if (fileInput.files && fileInput.files[0]) {
+            messageElement.textContent = "Image attached";
+            messageElement.style.display = "inline";  // Show the message
+        } else {
+            messageElement.textContent = "";
+            messageElement.style.display = "none";  // Hide the message if no file is selected
+        }
+    });
 
     const modal = document.getElementById('reportProfileModal');
     const openModalBtn = document.getElementById('openReportModalBtn');
@@ -53,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
         submitButton.style.cursor = disable ? 'no-drop' : 'pointer'; // Set cursor style explicitly
     }
 
-    // Submit the form via AJAX
+    // Submit the form via AJAX (including the file)
     reportForm.addEventListener('submit', function (event) {
         event.preventDefault(); // Prevent default form submission
 
@@ -61,14 +74,23 @@ document.addEventListener("DOMContentLoaded", function () {
         const otherReason = otherTextarea.value.trim();
 
         // Determine reportContent based on the selected radio option
-        const reportContent = selectedRadio.value === 'Other' ? 'Other' : selectedRadio.value; // Set reportContent as 'Other' if the "Other" option is selected
+        const reportContent = selectedRadio.value === 'Other' ? 'Other' : selectedRadio.value;
         const reportReason = selectedRadio.value === 'Other' ? otherReason : selectedRadio.parentElement.textContent.trim();
         const reportedUserId = document.getElementById('reportUserId').value; // Assuming this is the reported user ID
+        const proofImage = document.getElementById('proofImage').files[0]; // Get the attached image file
+
+        // Prepare FormData for file upload
+        const formData = new FormData();
+        formData.append('reported_user_id', reportedUserId);
+        formData.append('report_content', reportContent);
+        formData.append('report_reason', reportReason);
+        if (proofImage) {
+            formData.append('report_proof', proofImage); // Append the image file
+        }
 
         // Prepare the AJAX request
         const xhr = new XMLHttpRequest();
         xhr.open('POST', 'system-report-submission.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
         xhr.onload = function () {
             if (xhr.status === 200) {
@@ -79,7 +101,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         };
 
-        const data = `reported_user_id=${reportedUserId}&report_content=${encodeURIComponent(reportContent)}&report_reason=${encodeURIComponent(reportReason)}`;
-        xhr.send(data); // Send report data to the server
+        xhr.send(formData); // Send the FormData to the server
     });
 });

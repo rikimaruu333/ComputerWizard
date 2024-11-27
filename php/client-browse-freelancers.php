@@ -92,6 +92,12 @@
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
             </select>
+            <select>
+                <option value="">Job Category Filter</option>
+                <option value="">Coming Soon</option>
+                <option value="">Coming Soon</option>
+                <option value="">Coming Soon</option>
+            </select>
         </div>
     </div>
 

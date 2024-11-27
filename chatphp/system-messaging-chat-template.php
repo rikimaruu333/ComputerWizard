@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once "../php/userconnection.php"; // Your database connection file
+include_once "../php/userconnection.php"; // Database connection
 
 $id = isset($_GET['id']) ? $_GET['id'] : null;  // Ensure ID is provided
 $usertype = isset($_GET['usertype']) ? $_GET['usertype'] : null;  // Ensure userType is provided
@@ -11,50 +11,75 @@ if (!$id || !$usertype) {
 }
 
 try {
-    // Fetch user details from the users table using the unique_id
-    $stmt = $newconnection->openConnection()->prepare("SELECT * FROM users WHERE unique_id = :id");
+    $con = (new Connection())->openConnection();
+
+    // Fetch user details
+    $stmt = $con->prepare("SELECT * FROM users WHERE unique_id = :id");
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
-    $row = $stmt->fetch(PDO::FETCH_OBJ);
+    $user = $stmt->fetch(PDO::FETCH_OBJ);
 
-    if ($row) {
-        // Default transaction count
+    if ($user) {
+        // Default counts
         $transactionCount = 0;
+        $jobPostsCount = 0;
+        $recommendationCount = 0;
 
-        // Check the user type and fetch transaction count accordingly
         if ($usertype === 'Client') {
-            $transactionStmt = $newconnection->openConnection()->prepare("SELECT COUNT(*) AS transaction_count FROM booking WHERE client_id = :client_id AND booking_status = 'Completed'");
-            $transactionStmt->bindParam(':client_id', $row->id);
+            // Count total job posts
+            $jobPostsStmt = $con->prepare("SELECT COUNT(*) AS total_jobposts FROM jobposts WHERE post_client_id = :user_id");
+            $jobPostsStmt->bindParam(':user_id', $user->id, PDO::PARAM_INT);
+            $jobPostsStmt->execute();
+            $jobPostsCount = $jobPostsStmt->fetchColumn();
+
+            // Count completed transactions
+            $transactionStmt = $con->prepare("SELECT COUNT(*) AS transaction_count FROM booking WHERE client_id = :client_id AND booking_status = 'Completed'");
+            $transactionStmt->bindParam(':client_id', $user->id, PDO::PARAM_INT);
         } elseif ($usertype === 'Freelancer') {
-            $transactionStmt = $newconnection->openConnection()->prepare("SELECT COUNT(*) AS transaction_count FROM booking WHERE freelancer_id = :freelancer_id AND booking_status = 'Completed'");
-            $transactionStmt->bindParam(':freelancer_id', $row->id);
+            // Count recommendations and average ratings
+            $recommendationStmt = $con->prepare("
+                SELECT 
+                    AVG(r.rating) AS avg_rating,
+                    COUNT(CASE WHEN r.recommendation = 'Recommended' THEN 1 END) AS recommendation_count
+                FROM reviews r 
+                WHERE r.freelancer_id = :freelancer_id
+            ");
+            $recommendationStmt->bindParam(':freelancer_id', $user->id, PDO::PARAM_INT);
+            $recommendationStmt->execute();
+            $recommendationData = $recommendationStmt->fetch(PDO::FETCH_ASSOC);
+            $recommendationCount = $recommendationData['recommendation_count'];
+
+            // Count completed transactions
+            $transactionStmt = $con->prepare("SELECT COUNT(*) AS transaction_count FROM booking WHERE freelancer_id = :freelancer_id AND booking_status = 'Completed'");
+            $transactionStmt->bindParam(':freelancer_id', $user->id, PDO::PARAM_INT);
         }
 
-        // Execute the statement if a valid user type is provided
+        // Execute transaction statement if applicable
         if (isset($transactionStmt)) {
             $transactionStmt->execute();
             $transactionData = $transactionStmt->fetch(PDO::FETCH_ASSOC);
             $transactionCount = $transactionData['transaction_count'];
         }
 
-        // Send user details back to the front end along with the transaction count
+        // Prepare response data
         echo json_encode([
             'status' => 'success',
-            'id' => htmlspecialchars($row->id),
-            'firstname' => htmlspecialchars($row->firstname),
-            'lastname' => htmlspecialchars($row->lastname),
-            'profile' => htmlspecialchars($row->profile),  // User profile picture
-            'fullname' => htmlspecialchars($row->firstname) . ' ' . htmlspecialchars($row->lastname),  // Full name
-            'email' => htmlspecialchars($row->email),  // Email
-            'phone' => htmlspecialchars($row->phone),  // Phone
-            'usertype' => $usertype,  // User type ('freelancer', 'client')
-            'incoming_id' => $id,  // Incoming ID used for chat
-            'transaction_count' => $transactionCount  // Include transaction count
+            'id' => htmlspecialchars($user->id),
+            'firstname' => htmlspecialchars($user->firstname),
+            'lastname' => htmlspecialchars($user->lastname),
+            'fullname' => htmlspecialchars($user->firstname) . ' ' . htmlspecialchars($user->lastname),
+            'email' => htmlspecialchars($user->email),
+            'phone' => htmlspecialchars($user->phone),
+            'profile' => htmlspecialchars($user->profile),
+            'usertype' => $usertype,
+            'transaction_count' => $transactionCount,
+            'job_posts_count' => $jobPostsCount,
+            'recommendation_count' => $recommendationCount
         ]);
     } else {
-        echo json_encode(['status' => 'error', 'message' => 'User not found']);
+        echo json_encode(['status' => 'error', 'message' => 'User not found.']);
     }
 } catch (PDOException $e) {
     echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
 }
-
+?>

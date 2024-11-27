@@ -80,6 +80,9 @@ $(document).ready(function() {
                 const phone = response.phone; // User phone number
                 const userId = response.id; // User phone number
                 const transactionCount = response.transaction_count; // User phone number
+                const jobPostsCount = response.job_posts_count; // For Clients
+                const recommendationCount = response.recommendation_count; // For Freelancers
+    
 
                 if (response.usertype === 'Freelancer') {
                     // Build freelancer info
@@ -107,7 +110,7 @@ $(document).ready(function() {
                         </div>
                         <div class="freelancer-user-recommendation">
                             <i class="fas fa-thumbs-up"></i>
-                            <p id="freelancer-user-recommendation">19 recommendations</p>
+                            <p id="freelancer-user-recommendation">${recommendationCount} recommendations</p>
                         </div>
                     `;
 
@@ -146,7 +149,7 @@ $(document).ready(function() {
                         </div>
                         <div class="client-user-jobposts">
                             <i class="bx bxs-book-content"></i>
-                            <p id="client-user-jobposts">30 job posts</p>
+                            <p id="client-user-jobposts">${jobPostsCount} job posts</p>
                         </div>
                     `;
 

@@ -37,6 +37,7 @@
                 ?>
 
                 <div class="select-container">
+                    <button id="toggleChartButton">Switch to Yearly</button>
                     <select id="selectMonth" class="custom-select">
                         <option value="1" <?= ($currentMonth == 1) ? 'selected' : ''; ?>>January</option>
                         <option value="2" <?= ($currentMonth == 2) ? 'selected' : ''; ?>>February</option>
@@ -65,6 +66,7 @@
 
                 <div class="analysis-container">
                     <canvas id="myChart"></canvas>
+                    <canvas id="barChart" style="display: none;"></canvas>
                 </div>
 
             </div>

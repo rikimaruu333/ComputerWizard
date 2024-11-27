@@ -30,6 +30,7 @@ try {
     }
 
     $currentUserId = $_SESSION['USER']->id;
+    $currentUserUsertype = $_SESSION['USER']->usertype;
 
     // Fetch comments for the specified post
     $stmt = $con->prepare("
@@ -55,7 +56,8 @@ try {
     // Return success response with comments
     echo json_encode([
         'status' => 'success',
-        'comments' => $comments
+        'comments' => $comments,
+        'user_usertype' => $currentUserUsertype
     ]);
 } catch (Exception $e) {
     // Error handling

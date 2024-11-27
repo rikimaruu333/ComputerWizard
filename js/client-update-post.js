@@ -75,7 +75,7 @@ $(document).ready(function() {
 
     // Show success message if post was updated
     if (localStorage.getItem('postUpdated') === 'true') {
-        toastr.success('Post updated successfully!');
+        toastr.info('Post updated successfully!');
         localStorage.removeItem('postUpdated');
     }
 });

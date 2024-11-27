@@ -16,6 +16,17 @@
                     <p id="reportProfileUsertype"></p>
                 </div>
             </div>
+            <div class="proof-attachment">
+                <label for="proofImage" class="proof-label">Attach Proof (Image):</label>
+                <div class="file-upload">
+                    <input type="file" id="proofImage" class="input" accept="image/*">
+                    <label for="proofImage" class="upload-btn" title="Choose file">
+                        <i class="bx bxs-plus-circle"></i> 
+                        <span id="proofImageMessage" class="proof-message"></span>
+                    </label>
+                </div>
+            </div>
+
             <p class="report-text-header">Please select a reason for reporting this profile:</p>
             <div class="report-options">
                 <label>

@@ -37,7 +37,7 @@ function populateFreelancerList(freelancers) {
 
         var freelancerHTML = `
             <div class="freelancer-details-container">
-                <div class="freelancer-details">
+                <div class="freelancer-details view-profile-btn" data-freelancer-id="${freelancer.id}">
                     <img src="${freelancer.profile}" class="freelancer-avatar" alt="Freelancer Avatar">
                     <div class="freelancer-info">
                         <h3>${freelancer.firstname} ${freelancer.lastname}</h3>
@@ -134,7 +134,7 @@ function renderFreelancers(freelancers) {
 
             const freelancerHTML = `
                 <div class="freelancer-details-container">
-                    <div class="freelancer-details">
+                    <div class="freelancer-details view-profile-btn" data-freelancer-id="${freelancer.id}">
                         <img src="${freelancer.profile}" class="freelancer-avatar" alt="Freelancer Image">
                         <div class="freelancer-info">
                             <h3>${freelancer.firstname} ${freelancer.lastname}</h3>

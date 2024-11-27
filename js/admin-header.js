@@ -219,6 +219,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         violatorProfileImage.src = report.reported_profile_image_url ? report.reported_profile_image_url : '../images/user.jpg';
         violatorProfileImage.title = `${report.reported_firstname} ${report.reported_lastname} (${report.reported_usertype}). Click to view profile.`;
+        
+        // Display the report proof image (attached image)
+        if (report.report_proof) {
+            reportProofImage.src = report.report_proof; // Assuming report_proof contains the URL of the image
+            reportProofImage.style.display = 'block';  // Show the image if it exists
+        } else {
+            reportProofImage.style.display = 'none';  // Hide the image if it does not exist
+        }
 
         // Clear any previous event listeners to avoid duplicate bindings
         reporterProfileImage.onclick = null;

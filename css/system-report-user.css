@@ -85,7 +85,6 @@
     color: #202020;
     font-size: 14px;
     font-weight: 400;
-    margin-top: 20px;
 }
 .report-options{
     margin-top: 15px;
@@ -181,4 +180,62 @@
     background: #e2e5e9;
     color: #bcc0C4;
     outline: none;
+}
+
+
+
+
+
+
+
+.proof-attachment {
+    margin-top: 5px;
+    padding: 10px 0;
+    background-color: #FEFEFE;
+    border-radius: 5px;
+}
+
+.proof-attachment .proof-label {
+    font-size: 14px;
+    color: #202020;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.proof-attachment .file-upload {
+    position: relative;
+    display: inline-block;
+}
+
+.proof-attachment .upload-btn {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #1f65fb;
+    cursor: pointer;
+    border: 1px solid #1f65fb;
+    padding: 8px 12px;
+    background-color: #FEFEFE;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.proof-attachment .upload-btn i {
+    font-size: 20px;
+    margin: 0 5px;
+}
+
+.proof-attachment .upload-btn:hover {
+    background-color: #f1f7ff;
+    color: #1f65fb;
+}
+
+.proof-attachment #proofImage {
+    display: none; /* Hide the default file input */
+}
+
+.proof-attachment #proofImagePreviewText {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #1f65fb;
+    display: none;
 }

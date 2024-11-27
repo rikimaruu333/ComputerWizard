@@ -18,10 +18,10 @@ try {
     $stmt = $con->prepare("
         SELECT comment_id 
         FROM comments 
-        WHERE comment_id = :comment_id AND user_id = :user_id
+        WHERE comment_id = :comment_id
     ");
     $stmt->bindParam(':comment_id', $comment_id);
-    $stmt->bindParam(':user_id', $_SESSION['USER']->id);
+    // $stmt->bindParam(':user_id', $_SESSION['USER']->id);
     $stmt->execute();
 
     if ($stmt->rowCount() === 0) {

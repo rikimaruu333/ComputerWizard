@@ -28,6 +28,9 @@
             <div class="report-details">
                 <p><strong><span id="modalReportDetailsContent"></span></strong></p>
                 <p><span id="modalReportDetailsReason"></span></p><br>
+                 <p>Proof:</p>
+                <img id="reportProofImage" style="display:none; max-width: 100%; height: auto;" alt="Report Proof Image">
+                <br>
                 <p><span id="modalReportDetailsDate"></span></p>
             </div>
         </div>

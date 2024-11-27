@@ -117,8 +117,12 @@ body{
   border-bottom: 1px solid #DDDDDD;
 }
 .freelancer-details{
+  cursor: pointer;
   display: flex;
   align-items: center;
+}
+.freelancer-details:hover h3{
+  text-decoration: underline;
 }
 .freelancer-details img{
   width: 45px;

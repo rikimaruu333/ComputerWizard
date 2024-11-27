@@ -334,88 +334,83 @@ document.addEventListener("DOMContentLoaded", function () {
     
 
 
+    
+    // Toggle chart visibility
+    $('#toggleChartButton').click(function () {
+        var isLineChartVisible = $('#myChart').is(':visible');
+        if (isLineChartVisible) {
+            $('#myChart').hide();
+            $('#barChart').show();
+            $(this).text('Switch to Daily');
 
+            // Fetch data for the bar chart
+            var selectedYear = $('#selectYear').val();
+            fetchDataAndUpdateBarChart(selectedYear);
+        } else {
+            $('#barChart').hide();
+            $('#myChart').show();
+            $(this).text('Switch to Yearly');
+        }
+    });
 
-
-    $(document).ready(function() {
-        var myChart;
-        
-
-        // Function to fetch data and update chart based on selected month and year
+    $(document).ready(function () {
+        var myChart; // Line chart
+        var barChart; // Bar chart
+    
+        // Function to fetch data and update the line chart based on selected month and year
         function fetchDataAndUpdateChart(selectedMonth, selectedYear) {
             $.ajax({
                 url: 'admin-fetch-analysis-data.php',
                 type: 'GET',
                 dataType: 'json',
                 data: { month: selectedMonth, year: selectedYear },
-                success: function(response) {
+                success: function (response) {
                     var totalRegisteredClients = response.totalRegisteredClients;
                     var totalRegisteredFreelancers = response.totalRegisteredFreelancers;
-                    var freelancerRequests = response.freelancerRequests;  // Pending requests (status = 0)
-
-                    // Get the number of days in the selected month
+                    var freelancerRequests = response.freelancerRequests;
+    
                     var daysInMonth = new Date(selectedYear, selectedMonth, 0).getDate();
                     var labels = Array.from({ length: daysInMonth }, (_, i) => (i + 1).toString());
-
-                    // Get the canvas context
+    
                     var ctx = document.getElementById('myChart').getContext('2d');
-
-                    // Create gradient for the chart background
                     var gradientBg = ctx.createLinearGradient(0, 0, 0, 400);
                     gradientBg.addColorStop(0, 'rgba(255, 99, 132, 0.2)');
                     gradientBg.addColorStop(1, 'rgba(255, 99, 132, 0)');
-
-                    // Define the data for the chart
+    
                     var chartData = {
                         labels: labels,
                         datasets: [
                             {
                                 label: 'Total Registered Clients',
                                 data: totalRegisteredClients,
-                                fill: true,  // Fill the area below the line
+                                fill: true,
                                 backgroundColor: gradientBg,
                                 borderColor: 'rgba(255, 99, 132, 1)',
                                 borderWidth: 2,
                                 pointBackgroundColor: 'rgba(255, 99, 132, 1)',
-                                pointBorderColor: '#fff',
-                                pointHoverBackgroundColor: '#fff',
-                                pointHoverBorderColor: 'rgba(255, 99, 132, 1)',
-                                pointRadius: 5,
-                                pointHoverRadius: 7,
-                                tension: 0.4  // Smooth curves for the lines
+                                tension: 0.4,
                             },
                             {
                                 label: 'Total Registered Freelancers',
-                                data: totalRegisteredFreelancers,  // Only freelancers with status = 1
+                                data: totalRegisteredFreelancers,
                                 fill: false,
                                 borderColor: '#1f65fb',
                                 borderWidth: 2,
                                 pointBackgroundColor: '#1f65fb',
-                                pointBorderColor: '#fff',
-                                pointHoverBackgroundColor: '#fff',
-                                pointHoverBorderColor: '#1f65fb',
-                                pointRadius: 5,
-                                pointHoverRadius: 7,
-                                tension: 0.4  // Smooth curves for the lines
+                                tension: 0.4,
                             },
                             {
                                 label: 'Pending Freelancer Requests',
-                                data: freelancerRequests,  // Pending requests (status = 0)
+                                data: freelancerRequests,
                                 fill: false,
                                 borderColor: '#FEC400',
                                 borderWidth: 2,
                                 pointBackgroundColor: '#FEC400',
-                                pointBorderColor: '#fff',
-                                pointHoverBackgroundColor: '#fff',
-                                pointHoverBorderColor: '#FEC400',
-                                pointRadius: 5,
-                                pointHoverRadius: 7,
-                                tension: 0.4  // Smooth curves for the lines
-                            }
-                        ]
+                                tension: 0.4,
+                            },
+                        ],
                     };
-
-                    // Chart configuration
+    
                     var config = {
                         type: 'line',
                         data: chartData,
@@ -478,36 +473,132 @@ document.addEventListener("DOMContentLoaded", function () {
                             }
                         }
                     };
-
-                    // Destroy the previous chart if it exists
+    
                     if (myChart) {
                         myChart.destroy();
                     }
-
-                    // Create the chart
                     myChart = new Chart(ctx, config);
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     console.error('Error fetching data:', error);
-                }
+                },
             });
         }
-
-        // Get the currently selected month and year from the dropdowns
+    
+        // Function to fetch data and update the bar chart based on selected year
+        function fetchYearlyDataAndUpdateBarChart(selectedYear) {
+            $.ajax({
+                url: 'admin-fetch-yearly-analysis-data.php',
+                type: 'GET',
+                dataType: 'json',
+                data: { year: selectedYear },
+                success: function (response) {
+                    // Convert full month names to abbreviations
+                    var labels = Object.keys(response).map(month =>
+                        month.slice(0, 3)
+                    );
+                    var data = Object.values(response);
+        
+                    var ctx = document.getElementById('barChart').getContext('2d');
+        
+                    // Dynamic colors based on thresholds
+                    var backgroundColors = data.map(value => {
+                        if (value > 10) return 'rgba(255, 99, 132, 0.8)';
+                        if (value > 5) return '#1f65fbdc';
+                        return '#FEC400DC';
+                    });
+        
+                    var barChartData = {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: 'Yearly Data',
+                                data: data,
+                                backgroundColor: backgroundColors,
+                                borderColor: backgroundColors.map(color =>
+                                    color.replace('0.8', '1')
+                                ),
+                                borderWidth: 2,
+                            },
+                        ],
+                    };
+        
+                    var barConfig = {
+                        type: 'bar',
+                        data: barChartData,
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                    labels: {
+                                        color: '#333',
+                                        font: { size: 14 },
+                                    },
+                                },
+                                tooltip: {
+                                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                                    titleColor: '#fff',
+                                    bodyColor: '#fff',
+                                    cornerRadius: 6,
+                                    padding: 10,
+                                },
+                            },
+                            scales: {
+                                x: {
+                                    grid: { display: false },
+                                    ticks: {
+                                        color: '#333',
+                                        font: { size: 14 },
+                                    },
+                                },
+                                y: {
+                                    beginAtZero: true,
+                                    grid: {
+                                        color: '#ddd',
+                                        borderDash: [5, 5],
+                                    },
+                                    ticks: {
+                                        color: '#333',
+                                        font: { size: 14 },
+                                    },
+                                },
+                            },
+                            animation: {
+                                duration: 1000,
+                                easing: 'easeInOutQuad',
+                            },
+                        },
+                    };
+        
+                    if (barChart) {
+                        barChart.destroy();
+                    }
+                    barChart = new Chart(ctx, barConfig);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching yearly data:', error);
+                },
+            });
+        }
+        
+        
+    
         var selectedMonth = $('#selectMonth').val();
         var selectedYear = $('#selectYear').val();
-
-        // Fetch data on page load with preselected month and year
+    
         fetchDataAndUpdateChart(selectedMonth, selectedYear);
-
-        // Handle month and year select changes
-        $('#selectMonth, #selectYear').change(function() {
+        fetchYearlyDataAndUpdateBarChart(selectedYear);
+    
+        $('#selectMonth, #selectYear').change(function () {
             selectedMonth = $('#selectMonth').val();
             selectedYear = $('#selectYear').val();
             fetchDataAndUpdateChart(selectedMonth, selectedYear);
+            fetchYearlyDataAndUpdateBarChart(selectedYear);
         });
     });
-
+    
 
     $(document).ready(function() {
         // Function to print the chart into a PDF

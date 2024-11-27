@@ -108,7 +108,7 @@
                         <div class="top">
                             <div class="userDetails">
                                 <div class="profileImg">
-                                    <img src="../images/userpic.jpg" alt="">
+                                    <img src="../images/userpic.jpg" alt="">    
                                 </div>
                                 <div class="details">
                                     <p class="userNickName">Ricky Monsales</p>

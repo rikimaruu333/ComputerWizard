@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'status' => $_POST['status'], // Ensure this is set correctly
             'email' => $_POST['email'],
             'password' => $_POST['password'],
-            'valid_id_type' => $_POST['valid_id_type']
+            'valid_id_type' => $_POST['valid_id_type'] ?? null
         ];
 
         // Call the usersignup function

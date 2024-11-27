@@ -43,7 +43,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <div class="hellotxt"><font class="hello">HELLO</font> <font color="#140ca5" class="user">USERS</font><br></div>
                     <div class="welcome">
                         Welcome to Bogo City GigHub <br>
-                        Hire the best freelancers for any job!
+                        Hire the best freelancers for any job! 
+                        <br><br>
+                        Your one-stop platform to connect with talented freelancers and businesses. <br>
+                        Whether you're a <font color="#0051ff" class="user"><b>freelancer</b></font> looking for exciting new projects or a <font color="#0051ff" class="user"><b>client</b></font> in search <br>
+                        of top-notch talent, you've come to the right place!
                     </div>
                 </div>
             </div>
