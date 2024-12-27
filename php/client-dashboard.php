@@ -123,7 +123,10 @@
                             <img src="../images/l.jpg" alt="" id="thumbnailImg">
                             <div class="content1" id="expandBtn"><i class="bx bx-fullscreen"></i>EXPAND</div>
                         </div>
-
+                        <div class="post-job-category">
+                            <p>Job Category: <span id="jobCategory"></span></p>
+                            <p>Needed Freelancer: <span id="jobNeeded"></span></p>
+                        </div>
                         <div class="btns">
                             <div class="left">
                                 <div class="post-view-comments"  id="viewCommentsBtn">

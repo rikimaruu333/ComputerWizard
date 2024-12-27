@@ -116,6 +116,9 @@ function populateCard(posts) {
             imgBg.hide(); // Hide image container if no images
         }
 
+        card.find('p #jobCategory').text(post.job_category);
+        card.find('p #jobNeeded').text(post.job);
+        
         // Show or hide the card-config based on tagged freelancer
         if (post.hasTaggedFreelancer) {
             card.find('.bxs-user-circle').show(); // Show if there are tagged freelancers

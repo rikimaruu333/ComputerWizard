@@ -150,6 +150,9 @@ function populateCard(data) {
             imgBg.hide(); // Hide image container if no images
         }
 
+        card.find('p #jobCategory').text(post.job_category);
+        card.find('p #jobNeeded').text(post.job);
+        
         card.find('#viewCommentsBtn').attr('data-post-id', post.post_id);
         card.find('.comments').html(post.total_comments + ' comments');
         card.find('.userImg img').attr('src', post.currentUserProfile);

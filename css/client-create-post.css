@@ -155,7 +155,7 @@
     margin: 20px 25px;
 }
 
-.create-post-form button {
+.create-post-form .create-post-button {
     width: 100%;
     height: 50px;
     color: #FEFEFE;
@@ -168,23 +168,50 @@
     transition: background-color 0.3s ease;
 }
 
-.create-post-form button:hover {
+.create-post-form .create-post-button:hover,
+.create-post-form .create-post-select-job-category-button:hover {
     background-color: #edf4ff;
     border: 1px solid #1f65fb;
     color: #1f65fb;
 }
 
-.create-post-form :where(textarea, button){
+.create-post-form :where(textarea, .create-post-button){
     width: 100%;
     outline: none;
     border: none;
+}
+
+.create-post-job-category .create-post-select-job-category-button,
+.create-post-job-category input{
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #FEFEFE;
+    color: #333;
+    width: 49%;
 }
 .create-post-form textarea{
     resize: none;
     font-size: 14px;
     margin-top: 30px;
-    min-height: 100px;
+    min-height: 40px;
     background-color: #FEFEFE;
+}
+.create-post-form textarea::-webkit-scrollbar{
+    width: 5px;
+}
+.create-post-form textarea::-webkit-scrollbar-track{
+    background-color: #edf4ff;
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;
+}
+.create-post-form textarea::-webkit-scrollbar-thumb{
+    background-color: #1f65fb;
+    border-radius: 10px;
 }
 .create-post-form textarea::placeholder{
     color: #858585;
@@ -192,12 +219,12 @@
 .create-post-form textarea:focus::placeholder{
     color: #b3b3b3;
 }
-.create-post-form textarea:valid ~ button{
+.create-post-form textarea:valid ~ .create-post-button{
     color: #FEFEFE;
     cursor: pointer;
-    background: #4599ff;
+    background: #1f65fb;
 }
-.create-post-form textarea:valid ~ button:hover{
+.create-post-form textarea:valid ~ .create-post-button:hover{
     background: #1a81ff;
 }
 .create-post-options{
@@ -232,3 +259,256 @@
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* job-category-modal.css */
+
+.job-category-modal {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.job-category-content {
+    position: absolute;
+    top: 12%;
+    left: 20%;
+    width: 500px;
+    height: 440px;
+    overflow: hidden;
+    background: #FEFEFE;
+    border-radius: 10px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .12);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.job-category-header {
+    padding: 10px 15px;
+    background-color: #FEFEFE;
+    color: #353535;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.job-category-close-btn {
+    color: #202020;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.job-category-close-btn:hover {
+    color: #1f65fb;
+}
+.job-category-container{
+    position: relative;
+    margin: 10px 10px 0 10px;
+    padding: 10px 20px 20px 20px;
+    min-height: 290px;
+    max-height: 290px;
+    overflow: auto;
+}
+.job-category-container::-webkit-scrollbar{
+    width: 5px;
+}
+.job-category-container::-webkit-scrollbar-track{
+    background-color: #edf4ff;
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;
+}
+.job-category-container::-webkit-scrollbar-thumb{
+    background-color: #1f65fb;
+    border-radius: 10px;
+}
+.job-category-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.job-category-list li {
+    padding: 10px 15px;
+    font-size: 14px;
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.job-category-list li:hover {
+    background-color: #edf4ff;
+    border: 1px solid #1f65fb;
+    color: #1f65fb;
+}
+
+.job-list-container {
+    display: none;
+    margin-top: 20px;
+}
+
+.job-list-container h4 {
+    margin-bottom: 10px;
+    color: #202020;
+}
+
+#jobList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#jobList li {
+    font-size: 14px;
+    padding: 10px 15px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 5px;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+#jobList li:hover {
+    background-color: #edf4ff;
+    border: 1px solid #1f65fb;
+    color: #1f65fb;
+}
+.job-category-list li.selected,
+#jobList li.selected {
+    background-color: #edf4ff;
+    border: 1px solid #1f65fb;
+    color: #1f65fb;
+}
+.job-category-button-container{
+    padding: 20px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+.job-category-select-btn {
+    width: 100%;
+    height: 50px;
+    color: #FEFEFE;
+    background-color: #1f65fb;
+    border: 1px solid #555;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.job-category-select-btn:hover {
+    background-color: #edf4ff;
+    border: 1px solid #1f65fb;
+    color: #1f65fb;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Custom Job Container Styles */
+.custom-job-container {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.custom-job-container label {
+    font-size: 14px;
+    color: #202020;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.custom-job-container input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.custom-job-container input[type="text"]:focus {
+    border-color: #007bff; /* Add a focus effect */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Optional: Styling the container when displayed */
+.custom-job-container[style*="display: block;"] {
+    animation: fadeIn 0.3s ease;
+}
+
+/* Fade-in animation for smooth appearance */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

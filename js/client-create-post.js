@@ -41,7 +41,7 @@ fetchClientData();
 function updateClientInfo(data) {
     document.getElementById("postCardImg").src = data.profile ? data.profile : '../images/user.jpg';
     document.getElementById("postCardName").innerText = data.firstname + ' ' + data.lastname;
-    document.getElementById("postCardCaption").placeholder = 'Whats on your mind, ' + data.firstname + ' ' + data.lastname;
+    // document.getElementById("postCardCaption").placeholder = 'Whats on your mind, ' + data.firstname + ' ' + data.lastname;
     document.getElementById("postCardUsertype").innerText = data.usertype;
 }
 });
@@ -105,10 +105,24 @@ $(document).ready(function() {
         $("#picture").val('');
     });
 
+    // Prevent form submission when clicking the "Select a Job Category" button
+    $(".create-post-select-job-category-button").on("click", function(e) {
+        e.preventDefault(); // Stop default form submission behavior
+    });
+    
     // Form submission
     $("#createPostForm").submit(function(e) {
         e.preventDefault();
 
+        // Check if job category and job are selected
+        const jobCategory = $("#postCardJobCategory").val().trim();
+        const job = $("#postCardJob").val().trim();
+
+        if (!jobCategory || !job) {
+            toastr.error('Please select both a job category and a job.');
+            return; // Prevent form submission if fields are empty
+        }
+        
         var formData = new FormData(this); 
 
         // Append only the selected images to form data

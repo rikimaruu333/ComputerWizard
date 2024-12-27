@@ -4,6 +4,8 @@ include 'userconnection.php';
 
 $post_client_id = $_SESSION['USER']->id;
 $post_description = $_POST['post_description'] ?? '';
+$post_job_category = $_POST['post_job_category'] ?? '';
+$post_job = $_POST['post_job'] ?? '';
 
 try {
     // Open connection
@@ -14,9 +16,11 @@ try {
     $con->beginTransaction();
 
     // Prepare statement to insert the post
-    $stmt = $con->prepare("INSERT INTO jobposts (post_client_id, post_description, post_date) VALUES (:post_client_id, :post_description, NOW())");
+    $stmt = $con->prepare("INSERT INTO jobposts (post_client_id, post_description, post_job_category, post_job, post_date) VALUES (:post_client_id, :post_description, :post_job_category, :post_job, NOW())");
     $stmt->bindParam(':post_client_id', $post_client_id);
     $stmt->bindParam(':post_description', $post_description);
+    $stmt->bindParam(':post_job_category', $post_job_category);
+    $stmt->bindParam(':post_job', $post_job);
     $stmt->execute();
 
     // Get the last inserted post ID

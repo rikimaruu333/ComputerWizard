@@ -158,6 +158,8 @@ function populateCard(posts) {
         var tagButton = `<i class="bx bxs-user-plus" data-post-id="${post.post_id}" id="tagFreelancerBtn" title="Tag the freelancer that took on this job"></i>`;
         var infoButton = `<i class="bx bx-info-circle" data-post-id="${post.post_id}" id="postTagDetailsBtn" title="Show post tag details"></i>`;
 
+        card.find('p #jobCategory').text(post.job_category);
+        card.find('p #jobNeeded').text(post.job);
         
         if (post.isTagged) {
             // Post is tagged, append the info button instead of the tag button

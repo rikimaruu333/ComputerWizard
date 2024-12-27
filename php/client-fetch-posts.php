@@ -19,7 +19,7 @@ try {
 
     // Prepare statement to fetch only the posts for the current logged-in client along with user details
     $stmt = $con->prepare("
-        SELECT jp.post_id AS post_id, jp.post_tagged_user_id, jp.post_description AS caption, jp.post_date AS post_created, u.id AS id, u.usertype, u.firstname, u.lastname, u.profile
+        SELECT jp.post_id AS post_id, jp.post_tagged_user_id, jp.post_description AS caption, jp.post_job_category AS job_category, jp.post_job AS job, jp.post_date AS post_created, u.id AS id, u.usertype, u.firstname, u.lastname, u.profile
         FROM jobposts jp
         JOIN users u ON jp.post_client_id = u.id
         WHERE jp.post_client_id = :user_id
@@ -67,6 +67,8 @@ try {
         $response[] = [
             'post_id' => $post->post_id,
             'caption' => $post->caption,
+            'job_category' => $post->job_category,
+            'job' => $post->job,
             'post_created' => $post->post_created,
             'firstname' => $post->firstname,
             'lastname' => $post->lastname,

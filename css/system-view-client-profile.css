@@ -385,6 +385,15 @@ body{
     border-radius: 4px;
 }
 
+.post-job-category{
+    margin-top: 20px;
+}
+.post-job-category p{
+    font-size: 12px;
+}
+.post-job-category p span{
+    color: #1f65fb;
+}
 .content1 i{
     color: white;
     font-size: 30px;
