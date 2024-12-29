@@ -5,6 +5,9 @@ function attachUpdateModalEvent(card, post) {
         $('#updatePostCardName').text(`${post.firstname} ${post.lastname}`);
         $('#updatePostCardUsertype').text(post.usertype);
         $('#updatePostCardCaption').val(post.caption);
+        $('#postCardUpdateJobCategory').val(post.job_category);
+        $('#postCardUpdateJob').val(post.job);
+
         $('#updatePostId').val(post.post_id);
         
         // Display existing images
@@ -53,9 +56,26 @@ $(document).ready(function() {
         $("#updatePicture").val(''); // Reset input
     });
 
+    
+    // Prevent form submission when clicking the "Select a Job Category" button
+    $(".update-post-select-job-category-button").on("click", function(e) {
+        e.preventDefault(); // Stop default form submission behavior
+    });
+    
+
     // Handle form submission
     $("#updatePostForm").submit(function(e) {
         e.preventDefault();
+        
+        // Check if job category and job are selected
+        const updateJobCategory = $("#postCardUpdateJobCategory").val().trim();
+        const updateJob = $("#postCardUpdateJob").val().trim();
+
+        if (!updateJobCategory || !updateJob) {
+            toastr.error('Please select both a job category and a job.');
+            return; // Prevent form submission if fields are empty
+        }
+
         const formData = new FormData(this);
         selectedImages.forEach(file => formData.append('pictures[]', file));
         

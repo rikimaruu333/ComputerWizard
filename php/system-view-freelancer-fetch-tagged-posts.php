@@ -21,7 +21,7 @@ try {
 
     // Prepare statement to fetch posts tagged to the sent freelancer_id
     $stmt = $con->prepare("
-        SELECT jp.post_id AS post_id, jp.post_client_id, jp.post_tagged_user_id, jp.post_description AS caption, jp.post_date AS post_created, 
+        SELECT jp.post_id AS post_id, jp.post_client_id, jp.post_tagged_user_id, jp.post_description AS caption, jp.post_job_category AS job_category, jp.post_job AS job, jp.post_date AS post_created, 
                u.id AS id, u.usertype, u.firstname, u.lastname, u.profile
         FROM jobposts jp
         JOIN users u ON jp.post_client_id = u.id
@@ -52,6 +52,8 @@ try {
         $response[] = [
             'post_id' => $post->post_id,
             'caption' => $post->caption,
+            'job_category' => $post->job_category,
+            'job' => $post->job,
             'post_created' => $post->post_created,
             'firstname' => $post->firstname,
             'lastname' => $post->lastname,

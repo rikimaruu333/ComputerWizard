@@ -48,7 +48,7 @@ $(document).ready(function() {
                 <td>${service.service}</td>
                 <td>₱${formattedRate}</td>
                 <td class="service-config">
-                    <u class="service-edit-config" data-id="${service.service_id}" data-name="${service.service}" data-rate="${formattedRate}">Edit</u> |
+                    <u class="service-edit-config" data-id="${service.service_id}" data-category="${service.service_category}" data-name="${service.service}" data-rate="${formattedRate}">Edit</u> |
                     <u class="service-delete-config" data-id="${service.service_id}">Delete</u>
                 </td>
             </tr>
@@ -97,6 +97,7 @@ $(document).ready(function() {
     $('#addService').on('click', function(event) {
         event.preventDefault();
 
+        let serviceCategoryName = $('#serviceCategoryName').val();
         let serviceName = $('#serviceName').val();
         let serviceRate = $('#serviceRate').val();
 
@@ -116,6 +117,7 @@ $(document).ready(function() {
             type: 'POST',
             dataType: 'json',
             data: {
+                serviceCategoryName: serviceCategoryName,
                 serviceName: serviceName,
                 serviceRate: serviceRate
             },
@@ -136,10 +138,12 @@ $(document).ready(function() {
 
     $(document).on('click', '.service-edit-config', function() {
         const serviceId = $(this).data('id');
+        const serviceCategoryName = $(this).data('category');
         const serviceName = $(this).data('name');
         const serviceRate = $(this).data('rate');
 
         // Fill the modal fields with the current service data
+        $('#updateServiceCategoryName').val(serviceCategoryName);
         $('#updateServiceName').val(serviceName);
         $('#updateServiceRate').val(serviceRate);
         $('#updateServiceId').val(serviceId);
@@ -158,17 +162,19 @@ $(document).ready(function() {
         event.preventDefault();
 
         const serviceId = $('#updateServiceId').val();
+        const serviceCategoryName = $('#updateServiceCategoryName').val();
         const serviceName = $('#updateServiceName').val();
         const serviceRate = $('#updateServiceRate').val();
 
-        if (serviceName === "" || serviceRate === "") {
+        // Check if any of the fields are empty
+        if (serviceCategoryName === "" || serviceName === "" || serviceRate === "") {
             toastr.error('Please fill in all fields');
             return;
         }
         
-        // Ensure the rate is a valid integer
-        if (!/^\d+$/.test(serviceRate)) {
-            toastr.error('Rate must be a valid rate.');
+        // Ensure the rate is a valid number with optional decimal places
+        if (!/^\d+(\.\d{1,2})?$/.test(serviceRate)) {
+            toastr.error('Rate must be a valid number (e.g., 500 or 500.00).');
             return;
         }
 
@@ -178,6 +184,7 @@ $(document).ready(function() {
             dataType: 'json',
             data: {
                 service_id: serviceId,
+                service_category: serviceCategoryName,
                 service: serviceName,
                 service_rate: serviceRate
             },

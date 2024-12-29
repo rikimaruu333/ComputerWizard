@@ -4,6 +4,8 @@ include 'userconnection.php';
 
 $post_id = $_POST['post_id'] ?? null;
 $post_description = $_POST['post_description'] ?? '';
+$post_job_category = $_POST['post_job_category'] ?? '';
+$post_job = $_POST['post_job'] ?? '';
 $post_client_id = $_SESSION['USER']->id; // Ensure the user is authorized to update this post
 
 try {
@@ -15,8 +17,10 @@ try {
     $con->beginTransaction();
 
     // Update the post description
-    $stmt = $con->prepare("UPDATE jobposts SET post_description = :post_description WHERE post_id = :post_id AND post_client_id = :post_client_id");
+    $stmt = $con->prepare("UPDATE jobposts SET post_description = :post_description, post_job_category = :post_job_category, post_job = :post_job WHERE post_id = :post_id AND post_client_id = :post_client_id");
     $stmt->bindParam(':post_description', $post_description);
+    $stmt->bindParam(':post_job_category', $post_job_category);
+    $stmt->bindParam(':post_job', $post_job);
     $stmt->bindParam(':post_id', $post_id);
     $stmt->bindParam(':post_client_id', $post_client_id);
     $stmt->execute();

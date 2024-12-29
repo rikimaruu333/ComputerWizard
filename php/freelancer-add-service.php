@@ -5,17 +5,19 @@ session_start();
 header('Content-Type: application/json'); // Ensure the response is JSON
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $serviceCategoryName = $_POST['serviceCategoryName'];
     $serviceName = $_POST['serviceName'];
     $serviceRate = $_POST['serviceRate'];
     $freelancerId = $_SESSION['USER']->id;
 
-    if (!empty($serviceName) && !empty($serviceRate)) {
+    if (!empty($serviceCategoryName) && !empty($serviceName) && !empty($serviceRate)) {
         $connection = new Connection();
         $con = $connection->openConnection();
 
         try {
-            $stmt = $con->prepare("INSERT INTO servicelisting (freelancer_id, service, service_rate) VALUES (:freelancer_id, :service, :service_rate)");
+            $stmt = $con->prepare("INSERT INTO servicelisting (freelancer_id, service_category, service, service_rate) VALUES (:freelancer_id, :service_category, :service, :service_rate)");
             $stmt->bindParam(':freelancer_id', $freelancerId);
+            $stmt->bindParam(':service_category', $serviceCategoryName);
             $stmt->bindParam(':service', $serviceName);
             $stmt->bindParam(':service_rate', $serviceRate);
             $stmt->execute();
@@ -27,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo json_encode([
                 'success' => 'Service added successfully!',
                 'service_id' => $newServiceId,
+                'service_category' => $serviceCategoryName,
                 'service' => $serviceName,
                 'service_rate' => $serviceRate
             ]);
