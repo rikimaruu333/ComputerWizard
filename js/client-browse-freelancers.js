@@ -74,6 +74,7 @@ function populateFreelancerList(freelancers) {
 const searchBar = document.querySelector(".search input"),
       searchIcon = document.getElementById("searchBar"),
       searchFilterRecommendation = document.getElementById('filterRecommendation'),
+      searchFilterJobCategory = document.getElementById('filterJobCategory'),
       searchFilterAddress = document.getElementById('filterAddress'),
       searchFilterGender = document.getElementById('filterGender'),
       usersListContainer = document.querySelector(".freelancer-list-container");
@@ -95,6 +96,7 @@ searchIcon.onclick = () => {
 function filterAndSearchFreelancers() {
     let searchTerm = searchBar.value.trim();  // Get search term
     let recommendation = searchFilterRecommendation.value;  // Get selected recommendation filter
+    let category = searchFilterJobCategory.value;  // Get selected recommendation filter
     let address = searchFilterAddress.value;  // Get selected address filter
     let gender = searchFilterGender.value;    // Get selected gender filter
 
@@ -108,7 +110,7 @@ function filterAndSearchFreelancers() {
         }
     };
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.send(`searchTerm=${searchTerm}&recommendation=${recommendation}&address=${address}&gender=${gender}`); // Send search term and filters
+    xhr.send(`searchTerm=${searchTerm}&recommendation=${recommendation}&category=${category}&address=${address}&gender=${gender}`); // Send search term and filters
 }
 
 // Function to render the freelancer results
@@ -178,6 +180,7 @@ function renderFreelancers(freelancers) {
 // Add event listeners to trigger filter and search
 searchBar.onkeyup = filterAndSearchFreelancers;
 searchFilterRecommendation.addEventListener('change', filterAndSearchFreelancers);
+searchFilterJobCategory.addEventListener('change', filterAndSearchFreelancers);
 searchFilterAddress.addEventListener('change', filterAndSearchFreelancers);
 searchFilterGender.addEventListener('change', filterAndSearchFreelancers);
 

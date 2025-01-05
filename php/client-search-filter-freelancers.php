@@ -8,6 +8,7 @@ $con = $connection->openConnection();
 
 // Retrieve search and filter values
 $searchTerm = isset($_POST['searchTerm']) ? trim($_POST['searchTerm']) : '';
+$category = isset($_POST['category']) ? trim($_POST['category']) : '';
 $recommendation = isset($_POST['recommendation']) ? trim($_POST['recommendation']) : '';
 $address = isset($_POST['address']) ? trim($_POST['address']) : '';
 $gender = isset($_POST['gender']) ? trim($_POST['gender']) : '';
@@ -19,28 +20,40 @@ $currentTime = date('H:i'); // e.g., '14:30'
 
 // Base query
 $query = "
-    SELECT u.id, u.firstname, u.lastname, u.usertype, u.profile,
-           AVG(r.rating) AS rating,
-           COUNT(CASE WHEN r.recommendation = 'Recommended' THEN 1 END) AS recommendation_count,
-           CASE WHEN EXISTS (
-                SELECT 1 
-                FROM schedules s 
-                WHERE s.freelancer_id = u.id 
-                AND s.day = :currentDay 
-                AND s.time_in <= :currentTime 
-                AND s.time_out >= :currentTime
-            ) THEN 1 ELSE 0 END AS is_available,
-           CASE WHEN EXISTS (
-                SELECT 1 
-                FROM booking b 
-                WHERE b.freelancer_id = u.id 
-                AND b.booking_status = 'Approved'
-            ) THEN 1 ELSE 0 END AS has_booking
+    SELECT 
+        u.id, 
+        u.firstname, 
+        u.lastname, 
+        u.usertype, 
+        u.profile,
+        AVG(r.rating) AS rating,
+        COUNT(CASE WHEN r.recommendation = 'Recommended' THEN 1 END) AS recommendation_count,
+        CASE WHEN EXISTS (
+            SELECT 1 
+            FROM schedules s 
+            WHERE s.freelancer_id = u.id 
+            AND s.day = :currentDay 
+            AND s.time_in <= :currentTime 
+            AND s.time_out >= :currentTime
+        ) THEN 1 ELSE 0 END AS is_available,
+        CASE WHEN EXISTS (
+            SELECT 1 
+            FROM booking b 
+            WHERE b.freelancer_id = u.id 
+            AND b.booking_status = 'Approved'
+        ) THEN 1 ELSE 0 END AS has_booking,
+        GROUP_CONCAT(DISTINCT sl.service_category) AS service_categories,
+        GROUP_CONCAT(DISTINCT sl.service) AS services,
+        GROUP_CONCAT(DISTINCT sl.service_rate) AS service_rates
     FROM users u
     LEFT JOIN reviews r ON u.id = r.freelancer_id
+    LEFT JOIN servicelisting sl ON u.id = sl.freelancer_id
     WHERE u.usertype = 'Freelancer' AND u.status = 1";
 
 // Add filters
+if (!empty($category)) {
+    $query .= " AND sl.service_category = :category";
+}
 if (!empty($address)) {
     $query .= " AND u.address = :address";
 }
@@ -48,7 +61,7 @@ if (!empty($gender)) {
     $query .= " AND u.gender = :gender";
 }
 if (!empty($searchTerm)) {
-    $query .= " AND (u.firstname LIKE :searchTerm OR u.lastname LIKE :searchTerm)";
+    $query .= " AND (u.firstname LIKE :searchTerm OR u.lastname LIKE :searchTerm OR sl.service LIKE :searchTerm)";
 }
 
 // Grouping and sorting
@@ -70,6 +83,9 @@ $stmt = $con->prepare($query);
 $stmt->bindParam(':currentDay', $currentDay, PDO::PARAM_STR);
 $stmt->bindParam(':currentTime', $currentTime, PDO::PARAM_STR);
 
+if (!empty($category)) {
+    $stmt->bindParam(':category', $category, PDO::PARAM_STR);
+}
 if (!empty($address)) {
     $stmt->bindParam(':address', $address, PDO::PARAM_STR);
 }

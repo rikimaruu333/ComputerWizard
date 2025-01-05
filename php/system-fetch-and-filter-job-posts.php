@@ -8,6 +8,7 @@ try {
     $con = $connection->openConnection();
 
     // Get the filter values from the AJAX request
+    $category = isset($_GET['category']) ? $_GET['category'] : '';
     $order = isset($_GET['order']) ? $_GET['order'] : '';
     $address = isset($_GET['address']) ? $_GET['address'] : '';
     $gender = isset($_GET['gender']) ? $_GET['gender'] : '';
@@ -24,6 +25,11 @@ try {
         WHERE 1=1
     ";
 
+    // Apply category filter if provided
+    if (!empty($category)) {
+        $query .= " AND jp.post_job_category = :category";
+    }
+    
     // Apply address filter if provided
     if (!empty($address)) {
         $query .= " AND u.address = :address";
@@ -45,6 +51,10 @@ try {
     // Prepare the query
     $stmt = $con->prepare($query);
 
+    // Bind parameters if applicable
+    if (!empty($category)) {
+        $stmt->bindParam(':category', $category, PDO::PARAM_STR);
+    }
     // Bind parameters if applicable
     if (!empty($address)) {
         $stmt->bindParam(':address', $address, PDO::PARAM_STR);

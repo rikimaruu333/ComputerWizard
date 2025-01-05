@@ -5,12 +5,13 @@ $(document).ready(function () {
     fetchFilteredPosts();
 
     // Filter functionality on selection change
-    $('#filterOrder, #filterAddress, #filterGender').change(function () {
+    $('#filterJobCategory, #filterOrder, #filterAddress, #filterGender').change(function () {
         fetchFilteredPosts();
     });
 });
 
 function fetchFilteredPosts() {
+    var filterJobCategory = $('#filterJobCategory').val();
     var filterOrder = $('#filterOrder').val();
     var filterAddress = $('#filterAddress').val();
     var filterGender = $('#filterGender').val();
@@ -19,6 +20,7 @@ function fetchFilteredPosts() {
         url: 'system-fetch-and-filter-job-posts.php', 
         type: 'GET',
         data: {
+            category: filterJobCategory,
             order: filterOrder,
             address: filterAddress,
             gender: filterGender
@@ -242,7 +244,7 @@ $(document).ready(function () {
     fetchFilteredPosts();
 
     // Filter functionality on selection change
-    $('#filterOrder, #filterAddress, #filterGender').change(function () {
+    $('#filterJobCategory, #filterOrder, #filterAddress, #filterGender').change(function () {
         fetchFilteredPosts();
     });
 

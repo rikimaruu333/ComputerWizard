@@ -100,6 +100,25 @@
     </div>
     
     <div class="filter-selection">
+        <select name="post-filter-job-category" id="filterJobCategory">
+            <option value="">All Job Category</option>
+            <option value="Ships">Ships</option>
+            <option value="Vehicles">Vehicles</option>
+            <option value="Technical">Technical</option>
+            <option value="Veterinarian">Veterinarian</option>
+            <option value="Editor">Editor</option>
+            <option value="Programmer">Programmer</option>
+            <option value="Construction">Construction</option>
+            <option value="Healthcare">Healthcare</option>
+            <option value="Education">Education</option>
+            <option value="Arts">Arts</option>
+            <option value="Hospitality">Hospitality</option>
+            <option value="Sales">Sales</option>
+            <option value="Manufacturing">Manufacturing</option>
+            <option value="Other">Other</option>
+        </select>
+
+        
         <select name="post-filter-order" id="filterOrder">
             <option value="Latest Post">Latest Post</option>
             <option value="Oldest Post">Oldest Post</option>
