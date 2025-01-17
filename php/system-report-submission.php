@@ -56,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $reportContent = $_POST['report_content'];
     $reportReason = $_POST['report_reason']; // Get report reason from the POST request
     $reportDate = date('Y-m-d H:i:s'); // Get the current date and time
+    $reportStatus = 'Pending';
     $reportNotification = 0; // Unviewed notification initially
 
     // Handle file upload (image proof)
@@ -98,13 +99,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $db = $connection->openConnection();
 
         // Prepare and execute the insert statement with report_reason and report_proof
-        $stmt = $db->prepare("INSERT INTO reports (reporter_user_id, reported_user_id, report_content, report_reason, report_date, report_notification, report_proof) 
-                              VALUES (:reporter_user_id, :reported_user_id, :report_content, :report_reason, :report_date, :report_notification, :report_proof)");
+        $stmt = $db->prepare("INSERT INTO reports (reporter_user_id, reported_user_id, report_content, report_reason, report_date, report_status, report_notification, report_proof) 
+                              VALUES (:reporter_user_id, :reported_user_id, :report_content, :report_reason, :report_date, :report_status, :report_notification, :report_proof)");
         $stmt->bindParam(':reporter_user_id', $reporterUserId);
         $stmt->bindParam(':reported_user_id', $reportedUserId);
         $stmt->bindParam(':report_content', $reportContent);
         $stmt->bindParam(':report_reason', $reportReason); // Bind report reason
         $stmt->bindParam(':report_date', $reportDate);
+        $stmt->bindParam(':report_status', $reportStatus);
         $stmt->bindParam(':report_notification', $reportNotification);
         $stmt->bindParam(':report_proof', $reportProof); // Bind the file path (if uploaded)
 

@@ -38,28 +38,41 @@ if ($user) {
         $updateStmt->bindParam(':userId', $userId);
         
         if ($updateStmt->execute()) {
-            // Emit restriction event using a Socket.IO client
-            $socketUrl = 'http://localhost:8080'; // Adjust the URL if needed
-            $socketMessage = json_encode(['userId' => $userId, 'isRestricted' => true]);
+            // Update all report_status to 'Processed' for the restricted user
+            $updateReportsQuery = "UPDATE reports 
+                                   SET report_status = 'Processed' 
+                                   WHERE reported_user_id = :userId AND report_status = 'Pending'";
+            $updateReportsStmt = $pdo->prepare($updateReportsQuery);
+            $updateReportsStmt->bindParam(':userId', $userId);
 
-            // Send the restriction event to the server
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $socketUrl . '/emit-restriction');
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $socketMessage);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, [
-                'Content-Type: application/json',
-                'Content-Length: ' . strlen($socketMessage)
-            ]);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_exec($ch);
-            curl_close($ch);
+            if ($updateReportsStmt->execute()) {
+                // Emit restriction event using a Socket.IO client
+                $socketUrl = 'http://localhost:8080'; // Adjust the URL if needed
+                $socketMessage = json_encode(['userId' => $userId, 'isRestricted' => true]);
 
-            // Return the user's email and success response
-            echo json_encode([
-                'email' => $user['email'],
-                'status' => 'success'
-            ]);
+                // Send the restriction event to the server
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $socketUrl . '/emit-restriction');
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $socketMessage);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                    'Content-Type: application/json',
+                    'Content-Length: ' . strlen($socketMessage)
+                ]);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_exec($ch);
+                curl_close($ch);
+
+                // Return the user's email and success response
+                echo json_encode([
+                    'email' => $user['email'],
+                    'status' => 'success'
+                ]);
+            } else {
+                // Handle errors during reports update
+                http_response_code(500); // Internal Server Error
+                echo json_encode(['error' => 'Failed to update report statuses.']);
+            }
         } else {
             // Handle errors during status update
             http_response_code(500); // Internal Server Error

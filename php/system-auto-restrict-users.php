@@ -14,7 +14,7 @@ $reportedUserId = $_SESSION['USER']->id;
 // Check the number of unique reporters for the reported user
 $query = "SELECT COUNT(DISTINCT reporter_user_id) AS unique_reports 
           FROM reports 
-          WHERE reported_user_id = :reportedUserId";
+          WHERE reported_user_id = :reportedUserId AND report_status = 'Pending'";
 $stmt = $pdo->prepare($query);
 $stmt->bindParam(':reportedUserId', $reportedUserId);
 $stmt->execute();
@@ -50,6 +50,14 @@ if ($uniqueReports >= 10) {
         $updateStmt = $pdo->prepare($updateQuery);
         $updateStmt->bindParam(':userId', $reportedUserId);
         $updateStmt->execute();
+
+        // Update all report_status to 'Processed' for the restricted user
+        $updateReportsQuery = "UPDATE reports 
+                               SET report_status = 'Processed' 
+                               WHERE reported_user_id = :userId AND report_status = 'Pending'";
+        $updateReportsStmt = $pdo->prepare($updateReportsQuery);
+        $updateReportsStmt->bindParam(':userId', $reportedUserId);
+        $updateReportsStmt->execute();
 
         // Commit the transaction
         $pdo->commit();

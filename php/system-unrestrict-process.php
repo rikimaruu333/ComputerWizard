@@ -29,46 +29,59 @@ if ($user) {
     $restriction = $restrictionStmt->fetch(PDO::FETCH_ASSOC);
 
     if ($restriction) {
-        // Update the restriction record with the current date as date_unrestricted
-        $updateQuery = "UPDATE restrictions 
-                        SET date_unrestricted = NOW() 
-                        WHERE restricted_user_id = :userId AND date_unrestricted IS NULL";
-        $updateStmt = $pdo->prepare($updateQuery);
+        // Start a transaction for consistency
+        $pdo->beginTransaction();
 
-        // Bind parameters
-        $updateStmt->bindParam(':userId', $userId);
+        try {
+            // Update the restriction record with the current date as date_unrestricted
+            $updateQuery = "UPDATE restrictions 
+                            SET date_unrestricted = NOW() 
+                            WHERE restricted_user_id = :userId AND date_unrestricted IS NULL";
+            $updateStmt = $pdo->prepare($updateQuery);
+            $updateStmt->bindParam(':userId', $userId);
+            $updateStmt->execute();
 
-        // Execute the update and change user's status back to unrestricted (status = 1)
-        if ($updateStmt->execute()) {
             // Update user status to unrestricted
             $statusUpdateQuery = "UPDATE users SET status = 1 WHERE id = :userId";
             $statusUpdateStmt = $pdo->prepare($statusUpdateQuery);
             $statusUpdateStmt->bindParam(':userId', $userId);
+            $statusUpdateStmt->execute();
 
-            if ($statusUpdateStmt->execute()) {
-                // Fetch the newly updated date_unrestricted
-                $newRestrictionQuery = "SELECT date_unrestricted FROM restrictions WHERE restricted_user_id = :userId";
-                $newRestrictionStmt = $pdo->prepare($newRestrictionQuery);
-                $newRestrictionStmt->bindParam(':userId', $userId);
-                $newRestrictionStmt->execute();
-                $newRestriction = $newRestrictionStmt->fetch(PDO::FETCH_ASSOC);
+            // Mark relevant reports as Settled
+            $reportsUpdateQuery = "UPDATE reports 
+                                   SET report_status = 'Settled' 
+                                   WHERE reported_user_id = :userId AND report_status = 'Processed'";
+            $reportsUpdateStmt = $pdo->prepare($reportsUpdateQuery);
+            $reportsUpdateStmt->bindParam(':userId', $userId);
+            $reportsUpdateStmt->execute();
 
-                // Prepare the response to send back
-                echo json_encode([
-                    'status' => 'success',
-                    'message' => 'User has been successfully unrestricted.',
-                    'email' => $userEmail, // Send the user's email back in the response
-                    'dateUnrestricted' => $newRestriction['date_unrestricted'] // Send the updated date_unrestricted
-                ]);
-            } else {
-                // Handle errors during user status update
-                http_response_code(500); // Internal Server Error
-                echo json_encode(['error' => 'Failed to update user status.']);
-            }
-        } else {
-            // Handle errors during restriction record update
+            // Commit the transaction
+            $pdo->commit();
+
+            // Fetch the newly updated date_unrestricted
+            $newRestrictionQuery = "SELECT date_unrestricted FROM restrictions WHERE restricted_user_id = :userId";
+            $newRestrictionStmt = $pdo->prepare($newRestrictionQuery);
+            $newRestrictionStmt->bindParam(':userId', $userId);
+            $newRestrictionStmt->execute();
+            $newRestriction = $newRestrictionStmt->fetch(PDO::FETCH_ASSOC);
+
+            // Prepare the response to send back
+            echo json_encode([
+                'status' => 'success',
+                'message' => 'User has been successfully unrestricted.',
+                'email' => $userEmail, // Send the user's email back in the response
+                'dateUnrestricted' => $newRestriction['date_unrestricted'] // Send the updated date_unrestricted
+            ]);
+        } catch (Exception $e) {
+            // Rollback the transaction on error
+            $pdo->rollBack();
+
+            // Log the error
+            error_log("Error unrestricting user with ID $userId: " . $e->getMessage());
+
+            // Return error response
             http_response_code(500); // Internal Server Error
-            echo json_encode(['error' => 'Failed to update restriction record.']);
+            echo json_encode(['error' => 'Failed to unrestrict the user.']);
         }
     } else {
         // Handle the case where no active restriction is found
