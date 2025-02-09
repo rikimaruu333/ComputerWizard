@@ -90,7 +90,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="details ID">
                         <span class="title">Account Details</span>
 
@@ -138,7 +138,7 @@
                         <i class="bx bxs-chevron-right"></i>
                     </button>
                 </div>
-                
+
                 <div id="secondForm" class="form second">
                     <div class="registration-successful-freelancer">
                         <div class="registration-success">
